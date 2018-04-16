@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -66,7 +66,7 @@ public class ConAdmFormProveedores extends ControladorPrincipal implements Mouse
             }
             else if(opcion == 2 &&!"".equals(empresa) && !"".equals(responsable) && !"".equals(direccion) && !"".equals(telefono) ){
                 if(modFormProveedor.modificarProveedores(id, empresa, responsable, direccion, telefono)){
-                    ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha insertado exitosamente");
+                    ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha modificado exitosamente");
                     success.iniciarVista();
                 }
                 else{
