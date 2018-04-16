@@ -104,6 +104,15 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         
     }
     
+    public void ActualizarPrecios(){
+         for (int i = 0;  i<cant.size() ; i++) {
+            this.subTotal=(this.subTotal+(float)precio.get(i));
+        }
+         this.total=((this.subTotal+(this.subTotal*this.descuento)));
+         vista.lblSubTotal.setText(String.valueOf(this.subTotal));
+         vista.labelTotal.setText(String.valueOf(this.total));
+    }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -145,31 +154,32 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                 alert.iniciarVista();
             
             }else{
-                if (this.opc == 1) {
+                if (this.opc == 2) {
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
                     precio.add((float)modelo.obtenerPrecioCom(nombrePro));
 
                     ActualizarLista();
+                    ActualizarPrecios();
                     resetColor(vistaPro.panelAceptar);
                     resetColor(vistaPro.panelCancelar);
                     vistaPro.dispose();
                     vistaOPC.dispose();
-                }else if (this.opc == 2) {
+                }else if (this.opc == 1) {
                     
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
                     precio.add((float)modelo.obtenerPrecioPro(nombrePro));
 
                     ActualizarLista();
+                    ActualizarPrecios();
                     resetColor(vistaPro.panelAceptar);
                     resetColor(vistaPro.panelCancelar);
                     vistaPro.dispose();
                     vistaOPC.dispose();
                 }
             
-            
-                
+
             }
             
         }else if (vistaPro.panelCancelar ==e.getSource()) {//para los botones de la ventana add

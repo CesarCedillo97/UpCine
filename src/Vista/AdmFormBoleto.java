@@ -328,7 +328,7 @@ public class AdmFormBoleto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel panelAdd;
     private javax.swing.JPanel panelBack;
-    private javax.swing.JLabel title;
+    public javax.swing.JLabel title;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JLabel txtId;
     private javax.swing.JTextField txtPrecio;
