@@ -56,5 +56,26 @@ public class ModAdmFormCombos {
         }
     }
     
+    public String[] obtenerCombosYPro(){
+        try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select Descripcion, nombre from producto,combos");
+            rs.last();
+            int rows = rs.getRow();
+            rs.beforeFirst();
+            String[] arrayPelis = new String[rows];
+            int x =0 ;
+            while(rs.next()){
+                arrayPelis[x] = rs.getString("Descripcion, nombre");
+                x++;
+            }
+            return arrayPelis;
+        }
+        catch(SQLException e){
+            return null;
+        }
+    }
+    
     
 }

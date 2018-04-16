@@ -24,6 +24,7 @@ public class ConAdmAddProduct extends ControladorPrincipal{
    ModAdmFormCombos modelo;
    AdmFormCombos vistaAnt;
    Object list;
+   int opc;
    
    
    
@@ -31,16 +32,12 @@ public class ConAdmAddProduct extends ControladorPrincipal{
    private int Cantidad;
    
 
-    public ConAdmAddProduct(AdmAddProduct vista, ModAdmFormCombos modelo, Object modeloLista, AdmFormCombos vistaAnt) {
-        this.vista = vista;
-        this.modelo = modelo;
-        this.list = modeloLista;
-        this.vistaAnt = vistaAnt;
-    }
+ 
     
-    public ConAdmAddProduct(AdmAddProduct vista, ModAdmFormCombos modelo) {
+    public ConAdmAddProduct(AdmAddProduct vista, ModAdmFormCombos modelo, int opc) {
         this.vista = vista;
         this.modelo = modelo;
+        this.opc = opc;
     }
 
    
@@ -54,13 +51,31 @@ public class ConAdmAddProduct extends ControladorPrincipal{
         //vista.panelAceptar.addMouseListener(this);
         //vista.panelCancelar.addMouseListener(this);
         
-        //PARA EL COMBO BOX
-        String[] productos = modelo.obtenerProductos();
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for (String pro : productos){
-            model.addElement(pro);
+        switch(this.opc){
+            //PAra solo produtos
+            case 1:
+                //PARA EL COMBO BOX
+                String[] productos = modelo.obtenerProductos();
+                DefaultComboBoxModel model = new DefaultComboBoxModel();
+                for (String pro : productos){
+                    model.addElement(pro);
+                }
+                vista.comboProducto.setModel(model);
+                break;
+                //para combos y productos
+            case 2: 
+                //PARA EL COMBO BOX
+                String[] combos = modelo.obtenerCombosYPro();
+                DefaultComboBoxModel modelito = new DefaultComboBoxModel();
+                for (String pro : combos){
+                    modelito.addElement(pro);
+                }
+                vista.comboProducto.setModel(modelito);
+                break;
+            
         }
-        vista.comboProducto.setModel(model);
+        
+        
         
         //PARA EL SPINNER
         SpinnerNumberModel modeloSpinner = new SpinnerNumberModel( 

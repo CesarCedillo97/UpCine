@@ -49,10 +49,13 @@ public class ConAdmOpcProductos extends ControladorPrincipal implements MouseLis
         else if (vista.panelCombos== e.getSource()) {
             ConAdmABC conAdmABC = new controlador.ConAdmABC(modABC, vistaABC, this.idEmp, 9);
             conAdmABC.iniciarVista();
+            vista.dispose();
         }
         else if (vista.panelProductos==e.getSource()) {
             ConAdmABC conAdmABC = new controlador.ConAdmABC(modABC, vistaABC, this.idEmp, 4);
             conAdmABC.iniciarVista();
+            vista.dispose();
+            
         }
     }
 

@@ -62,9 +62,13 @@ public class ModAdmABC
                         + "     when Estado = 1 then 'Entregada'"
                         + "     end as 'Estado', empleado.Nombre "
                         + "from compra, empleado where empleado_IdEmpleado = IdEmpleado";
+                break;
             case 9: 
             txtConsulta = "select * from combos";
-            break;
+                break;
+            case 10: 
+            txtConsulta = "select * from venta";
+                break;
         }
         try{
             //Para abrir la conexion a la BD
