@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Vista;
+
+package vista;
 
 /**
  *
@@ -29,14 +25,12 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panelBack = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-<<<<<<< HEAD
         txtPelicula = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -52,46 +46,18 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
         panelPelis = new javax.swing.JPanel();
-=======
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        lblFecha = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        lblHora = new javax.swing.JLabel();
->>>>>>> 3102e76bc53f4f13d0d3b12bccbf2b9e683a901f
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(25, 116, 232));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(25, 116, 232));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logoChiquito.png"))); // NOI18N
 
         panelBack.setBackground(new java.awt.Color(25, 116, 232));
-        panelBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                panelBackMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
-                panelBackMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
-                panelBackMouseExited(evt);
-            }
-        });
+ 
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Long_Arrow_Left_64px.png"))); // NOI18N
 
@@ -127,11 +93,7 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(384, 384, 384)
                 .addComponent(jLabel2)
-<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 400, Short.MAX_VALUE)
-=======
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
->>>>>>> 3102e76bc53f4f13d0d3b12bccbf2b9e683a901f
                 .addComponent(panelBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -150,7 +112,6 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-<<<<<<< HEAD
         txtPelicula.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -160,21 +121,6 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
         jLabel5.setText("Num. Boletos: ");
 
         panelAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelAceptar.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                panelAceptarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
-                panelAceptarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
-                panelAceptarMouseExited(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(25, 116, 232));
@@ -198,21 +144,7 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
         );
 
         panelCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelCancelar.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                panelCancelarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
-                panelCancelarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
-                panelCancelarMouseExited(evt);
-            }
-        });
+ 
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(25, 116, 232));
@@ -273,93 +205,11 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
             panelPelisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 458, Short.MAX_VALUE)
         );
-=======
-        jPanel4.setBackground(new java.awt.Color(25, 116, 232));
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
-        );
-
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Función");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(3, 3, 3))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(3, 3, 3))
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
-        );
-
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Fecha:");
-
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Mazatlàn, Sinaloa, Mexico /");
-
-        lblFecha.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        lblFecha.setForeground(new java.awt.Color(255, 255, 255));
-        lblFecha.setText("jLabel10");
-
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Hora:");
-
-        lblHora.setForeground(new java.awt.Color(255, 255, 255));
-        lblHora.setText("jLabel11");
->>>>>>> 3102e76bc53f4f13d0d3b12bccbf2b9e683a901f
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
@@ -401,29 +251,10 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(txtIva, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(45, 45, 45))))))
-=======
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(3, 3, 3))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblHora)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 633, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFecha)
-                .addGap(230, 230, 230))
->>>>>>> 3102e76bc53f4f13d0d3b12bccbf2b9e683a901f
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-<<<<<<< HEAD
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -441,10 +272,11 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(panelBoletos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel10)
-                                    .addComponent(txtIva, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIva, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel10)))
                                 .addGap(27, 27, 27)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel12)
@@ -457,17 +289,6 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelPelis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
-=======
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(lblFecha)
-                    .addComponent(jLabel10)
-                    .addComponent(lblHora))
-                .addGap(11, 11, 11))
->>>>>>> 3102e76bc53f4f13d0d3b12bccbf2b9e683a901f
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -495,36 +316,6 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
     private void panelBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBackMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_panelBackMouseExited
-
-    private void panelAceptarMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_panelAceptarMouseClicked
-    {//GEN-HEADEREND:event_panelAceptarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelAceptarMouseClicked
-
-    private void panelAceptarMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_panelAceptarMouseEntered
-    {//GEN-HEADEREND:event_panelAceptarMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelAceptarMouseEntered
-
-    private void panelAceptarMouseExited(java.awt.event.MouseEvent evt)//GEN-FIRST:event_panelAceptarMouseExited
-    {//GEN-HEADEREND:event_panelAceptarMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelAceptarMouseExited
-
-    private void panelCancelarMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_panelCancelarMouseClicked
-    {//GEN-HEADEREND:event_panelCancelarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelCancelarMouseClicked
-
-    private void panelCancelarMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_panelCancelarMouseEntered
-    {//GEN-HEADEREND:event_panelCancelarMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelCancelarMouseEntered
-
-    private void panelCancelarMouseExited(java.awt.event.MouseEvent evt)//GEN-FIRST:event_panelCancelarMouseExited
-    {//GEN-HEADEREND:event_panelCancelarMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelCancelarMouseExited
 
     /**
      * @param args the command line arguments
@@ -564,7 +355,6 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-<<<<<<< HEAD
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -572,25 +362,11 @@ public class EmpVentaBoleto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-=======
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
->>>>>>> 3102e76bc53f4f13d0d3b12bccbf2b9e683a901f
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-<<<<<<< HEAD
     public javax.swing.JPanel panelAceptar;
-=======
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    public javax.swing.JLabel lblFecha;
-    public javax.swing.JLabel lblHora;
->>>>>>> 3102e76bc53f4f13d0d3b12bccbf2b9e683a901f
     public javax.swing.JPanel panelBack;
     public javax.swing.JPanel panelBoletos;
     public javax.swing.JPanel panelCancelar;

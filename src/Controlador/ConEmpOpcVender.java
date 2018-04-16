@@ -17,7 +17,7 @@ import vista.GenInicioSesion;
 import modelo.ModGenInicioSesion;
 import controlador.ConEmpVentaPeli;
 import modelo.ModEmpVentaPeli;
-import Vista.EmpVentaBoleto;
+import vista.EmpVentaBoleto;
 /**
  *
  * @author adria
@@ -59,7 +59,7 @@ public class ConEmpOpcVender extends ControladorPrincipal implements MouseListen
         if(VisOpcVender.panelBoleto == e.getSource()){
             EmpVentaBoleto vista = new EmpVentaBoleto();
             ModEmpVentaPeli modelo = new ModEmpVentaPeli();
-            ConEmpVentaPeli ventaBoleto = new ConEmpVentaPeli(modelo,vista);
+            ConEmpVentaPeli ventaBoleto = new ConEmpVentaPeli(modelo, vista, idEmp);
             ventaBoleto.iniciarVista();
         }
         //entra a la dulceria 

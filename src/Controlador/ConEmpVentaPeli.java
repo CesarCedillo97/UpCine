@@ -5,17 +5,22 @@
  */
 package controlador;
 
-import Vista.EmpVentaBoleto;
+import vista.EmpVentaBoleto;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import vista.GenAlert;
 import Vista.GenSucces;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.plaf.FontUIResource;
 import vista.GenConfirm;
 import modelo.ModEmpVentaPeli;
 
@@ -28,10 +33,11 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     ModEmpVentaPeli modelo;
     private int id;
     private String[][] listPelis;
-
-    public ConEmpVentaPeli(ModEmpVentaPeli modelo, EmpVentaBoleto vista) {
+    
+    public ConEmpVentaPeli(ModEmpVentaPeli modelo, EmpVentaBoleto vista,int idEmp) {
         this.vista = vista;
         this.modelo = modelo;
+        this.id = idEmp;
     }
     
 
@@ -41,19 +47,46 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         vista.pack();
         vista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         vista.setLocationRelativeTo(null);
-        vista.setVisible(true);
+        vista.pack();
         vista.panelBack.addMouseListener(this);
         listPelis = modelo.consultarPeliculas();
         int j=0;
+        ButtonGroup group = new ButtonGroup();
+        int counter = 0;
         for (int x =0; x < listPelis.length; x++){
-            JPanel panel = new JPanel(new GridLayout(1, 2));
-            j = (x*120);
-            panel.add(new JLabel(new ImageIcon(getClass().getResource("/movieImages/"+listPelis[x][6]))));
-            panel.add(new JPanel().add(new JLabel("6:30")));
-            panel.setBounds(5,j,530,120);
-            vista.panelPelis.add(panel);
-            
+            if(Integer.parseInt(listPelis[x][0]) > x){
+                JPanel panel = new JPanel(new BorderLayout());
+                JPanel panelHoras = new JPanel();
+                j = counter*120;
+                panel.add(new JLabel(new ImageIcon(getClass().getResource("/movieImages/"+listPelis[x][6]))),BorderLayout.WEST);
+                JLabel label = new JLabel(listPelis[x][1]+" "+listPelis[x][4]+" ("+listPelis[x][2]+") Sub: "+listPelis[x][3]);
+                label.setFont(new Font("Arial", Font.PLAIN, 18));
+                panel.add(label,BorderLayout.NORTH);
+                
+                for (String[] listPeli : listPelis)
+                {
+                    if (listPelis[x][0].equals(listPeli[0]))   
+                    {
+                        JRadioButton radio = new JRadioButton(listPeli[5]);
+                        radio.addMouseListener(this);
+                        group.add(radio);
+                        panelHoras.add(radio,BorderLayout.CENTER);
+                    }
+                }
+                panel.add(panelHoras);
+                panel.setBounds(5,j,530,120);
+                vista.panelPelis.add(panel);
+                counter++;
+            }            
         }
+        vista.setVisible(true);
+    }
+    
+    public boolean esIdRepetido(String id, String[][] lista, int x){
+        for (int i = 0; i < x; i++){
+            return lista[i][0].equals(id);
+        }
+        return false;
     }
 
     @Override
