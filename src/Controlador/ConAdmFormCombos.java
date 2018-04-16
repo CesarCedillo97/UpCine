@@ -37,7 +37,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
     public float precio;
     public String nombre;
     public String Descripcion;
-    ArrayList<String> productos;
+    ArrayList productos;
     DefaultListModel listaModel = new DefaultListModel();
     AdmAddProduct vistaP = new AdmAddProduct();
 
@@ -129,6 +129,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
             cantidad = (int)cant.intValue();
             producto = String.valueOf(vistaP.comboProducto.getSelectedItem());
             String nProducto = ("x"+cantidad+" "+producto);
+            
             if (cantidad <= 0 && !"".equals(producto)) {
                 GenAlert vistaAlert = new GenAlert();
                 ConAlert alert = new ConAlert(vistaAlert, "Por favor", "rellene todos los campos");

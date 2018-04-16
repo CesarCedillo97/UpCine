@@ -26,6 +26,7 @@ import javax.swing.DefaultListModel;
  */
 public class ConAdmFormCompras extends ControladorPrincipal implements MouseListener, FocusListener
 {
+    //Variables
     ModAdmFormCompras modFormCompras;
     AdmFormCompras formCompras;
     int opcion;
@@ -36,6 +37,8 @@ public class ConAdmFormCompras extends ControladorPrincipal implements MouseList
     GenAlert genAlert = new GenAlert();
     GenSucces genSuccess = new GenSucces();
     AdmAddProduct addProduct = new AdmAddProduct();
+    
+    //Constructor
     public ConAdmFormCompras(ModAdmFormCompras modFormCompras, AdmFormCompras formCompras, int opcion,int idEmp)
     {
         this.modFormCompras = modFormCompras;
