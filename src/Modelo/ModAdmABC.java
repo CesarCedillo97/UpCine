@@ -44,7 +44,7 @@ public class ModAdmABC
                 txtConsulta = "select IdProducto as ID,Descripcion, Cantidad, Costo, Precio_venta, proveedor.Nombre_empresa as Proveedor from producto, proveedor where proveedor_idProveedor = idProveedor;";
                 break;
             case 5:
-                txtConsulta = "select * from producto";    
+                txtConsulta = "select id,Descripcion, Precio  from mantenimiento where id!=0";    
                 break;
             case 6: 
                 txtConsulta = "select IdSala as ID, Filas, Columnas, Num_Asientos as Num_Asientos, Tipo,  \n" +
