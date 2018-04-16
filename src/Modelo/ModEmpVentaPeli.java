@@ -26,7 +26,7 @@ public class ModEmpVentaPeli {
             Date date1 = new Date();
             String date = dateFormat.format(date1);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT pelicula.IdPelicula, pelicula.Nombre, pelicula.Idioma, pelicula.Subtitulos, pelicula.Formato, funcion.Hora_inicio, pelicula.Imagen FROM funcion,pelicula WHERE pelicula.IdPelicula = funcion.pelicula_IdPelicula AND '2018-04-15' >= funcion.Fecha_inicio  AND '2018-04-15' <= funcion.Fecha_fin AND Estatus = 1");
+            ResultSet rs = s.executeQuery("SELECT pelicula.IdPelicula, pelicula.Nombre, pelicula.Idioma, pelicula.Subtitulos, pelicula.Formato, funcion.Hora_inicio, pelicula.Imagen,funcion.sala_IdSala FROM funcion,pelicula WHERE pelicula.IdPelicula = funcion.pelicula_IdPelicula AND '2018-04-15' >= funcion.Fecha_inicio  AND '2018-04-15' <= funcion.Fecha_fin AND Estatus = 1");
             rs.last();
             int size = rs.getRow();
             int x = 0;

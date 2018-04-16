@@ -27,15 +27,14 @@ public class AdmMenu extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lblHora = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         nombreEmpleado = new javax.swing.JLabel();
         panelCerrarSesion = new javax.swing.JPanel();
         lblCerrarSesion = new javax.swing.JLabel();
@@ -87,30 +86,24 @@ public class AdmMenu extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/rsz_logo_blanco.png"))); // NOI18N
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        lblHora.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblHora.setForeground(new java.awt.Color(255, 255, 255));
-        lblHora.setText("21:41");
-        jPanel3.add(lblHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 140, -1, -1));
-
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("12/03/2018");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, -1, -1));
-
         nombreEmpleado.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         nombreEmpleado.setForeground(new java.awt.Color(255, 255, 255));
         nombreEmpleado.setText("jLabel15");
         jPanel3.add(nombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 70, -1, -1));
 
         panelCerrarSesion.setBackground(new java.awt.Color(25, 116, 232));
-        panelCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        panelCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 panelCerrarSesionMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 panelCerrarSesionMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 panelCerrarSesionMouseExited(evt);
             }
         });
@@ -162,8 +155,10 @@ public class AdmMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelFunciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        panelFunciones.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 panelFuncionesMouseClicked(evt);
             }
         });
@@ -364,14 +359,18 @@ public class AdmMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panelVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        panelVentas.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 panelVentasMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 panelVentasMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 panelVentasMouseExited(evt);
             }
         });
@@ -523,7 +522,6 @@ public class AdmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -542,7 +540,6 @@ public class AdmMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public javax.swing.JLabel lblCerrarSesion;
-    private javax.swing.JLabel lblHora;
     public javax.swing.JLabel nombreEmpleado;
     public javax.swing.JPanel panelCerrarSesion;
     public javax.swing.JPanel panelCompras;

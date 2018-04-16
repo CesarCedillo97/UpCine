@@ -25,11 +25,15 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import modelo.ModEmpVentaPeli;
 import Vista.EmpSelectAsientos;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 /**
  *
  * @author Cesar Cedillo
  */
-public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListener,FocusListener{
+public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListener,FocusListener, Runnable{
     EmpVentaBoleto vista;
     ModEmpVentaPeli modelo;
     private int id;
@@ -37,6 +41,9 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     private String[][] listPelis;
     private String[][] listPelis2;
     private int sala;
+    String hora, minutos, segundos, ampm;
+    Calendar calendario;
+    Thread h1;
     ButtonGroup group = new ButtonGroup();
     public ConEmpVentaPeli(ModEmpVentaPeli modelo, EmpVentaBoleto vista,int idEmp) {
         this.vista = vista;
@@ -63,6 +70,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         editor3.getTextField().addFocusListener(this);
         
         listPelis = modelo.consultarPeliculas();
+        System.out.println(Arrays.toString(modelo.consultarPeliculas()));
         int filas = 0; 
         for(int x =0; x < listPelis.length; x++){
             if(Integer.parseInt(listPelis[x][0]) > (x > 0 ? Integer.parseInt(listPelis[x-1][0]): x)){
@@ -94,6 +102,8 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         JPanel panelBoletos = new JPanel();
         panelBoletos.setBounds(50, 50, 360, 150);
         vista.add(panelBoletos);
+        h1 = new Thread(this);
+        h1.start();
         vista.setVisible(true);
     }
     
@@ -199,6 +209,37 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         vista.txtSubtotal1.setText(""+subT);
         vista.txtIva.setText(""+(subT*(IVA/100)));
         vista.txtTotal.setText(""+(subT + Float.parseFloat(vista.txtIva.getText())));
+    }
+
+    @Override
+    public void run()
+    {
+        Thread ct= Thread.currentThread();
+        
+        while(ct==h1){
+            calcula();
+            vista.hora.setText(hora+":"+minutos+":"+segundos+" "+ampm);
+            try{
+                Thread.sleep(1000);
+            }catch(InterruptedException e){}
+        }
+    }
+    
+    private void calcula() {
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+        
+        calendario.setTime(fechaHoraActual);
+        ampm= calendario.get(Calendar.AM_PM)==Calendar.AM?"AM":"PM";
+        
+        if(ampm.equals("PM")){
+            int h=calendario.get(Calendar.HOUR_OF_DAY)-12;
+            hora = h>9?""+h:"0"+h;
+        }else{
+            hora= calendario.get(Calendar.HOUR_OF_DAY)>9?""+calendario.get(Calendar.HOUR_OF_DAY):"0"+calendario.get(Calendar.HOUR_OF_DAY); 
+        }
+        minutos = calendario.get(Calendar.MINUTE)>9?""+calendario.get(Calendar.MINUTE):"0"+calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND)>9?""+calendario.get(Calendar.SECOND):"0"+calendario.get(Calendar.SECOND);
     }
     
 }

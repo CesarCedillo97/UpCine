@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConSucces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Vista/EmpVentaDulces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConEmpOpcVentaDulces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConEmpVentaDulces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmFormBoleto.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmFormCombos.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Modelo/ModAdmFormCombos.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Vista/EmpOpcVentaDulces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ControladorPrincipal.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Modelo/ModEmpVentaDulces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmAddProduct.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Modelo/ModAdmFormCompras.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Modelo/ModAdmFormEmpleados.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/EmpSelectAsientos.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmFormEmpleados.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConSucces.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/AdmFormCompras.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConEmpOpcVender.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConEmpVentaPeli.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Modelo/ModEmpVentaPeli.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/EmpVentaBoleto.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmFormSalas.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ControladorPrincipal.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmFormBoleto.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/AdmMenu.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/Reloj.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/AdmFormBoleto.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/main.java</file>
         </group>
     </open-files>
 </project-private>
