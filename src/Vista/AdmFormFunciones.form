@@ -469,7 +469,7 @@
         <Component class="javax.swing.JSpinner" name="txtHoraInicio">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="1522970356126" stepSize="10" type="date"/>
+              <SpinnerModel initial="now" stepSize="10" type="date"/>
             </Property>
             <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
               <SpinnerEditor format="HH:mm:ss" type="1"/>

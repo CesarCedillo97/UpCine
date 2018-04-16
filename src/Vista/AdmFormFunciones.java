@@ -218,7 +218,7 @@ public class AdmFormFunciones extends javax.swing.JFrame
 
         txtFechaIni.setDate(new java.util.Date(1522904250000L));
 
-        txtHoraInicio.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1522970356126L), null, null, java.util.Calendar.HOUR));
+        txtHoraInicio.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR));
         txtHoraInicio.setEditor(new javax.swing.JSpinner.DateEditor(txtHoraInicio, "HH:mm:ss"));
 
         txtHorafin.setModel(new javax.swing.SpinnerDateModel());

@@ -38,7 +38,7 @@ public class ModEmpFormVentaBoleto {
         }
     }
     
-    public String[] obtenerPeliculas(String peli){
+    public String[] obtenerHoraPelicula(String peli){
         try{
             Connection con = conexion.abrirConexion();
             Statement s = con.createStatement();
@@ -58,4 +58,6 @@ public class ModEmpFormVentaBoleto {
             return null;
         }
     }
+    
+    
 }
