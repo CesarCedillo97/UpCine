@@ -101,7 +101,7 @@ public class ModEmpVentaPeli {
             int[][] asientos = new int[filas][cols];
             for (int[] asiento : asientos)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < cols; j++)
                 {
                     asiento[j] = -1;
                 }                
@@ -117,14 +117,27 @@ public class ModEmpVentaPeli {
                 else{
                     asientos[fila][columna] = 0;
                 }
-                System.out.println("Fila: "+fila+"Col: "+columna);
             }
             conexion.cerrarConexion(con);
             return asientos;
         }
         catch(SQLException e){
-            System.out.println("no se pudo realizar la consulta");
             return null;
+        }
+    }
+    
+    public int getNumAsientos(int idSala){
+        try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT Num_Asientos FROM sala WHERE IdSala = "+idSala+"");
+            rs.next();
+            int num = rs.getInt("Num_Asientos");
+            conexion.cerrarConexion(con);
+            return num;
+        }
+        catch(SQLException e){
+            return -1;
         }
     }
 }

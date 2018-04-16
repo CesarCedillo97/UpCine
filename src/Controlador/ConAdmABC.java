@@ -272,7 +272,7 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                             break;
                         }
                     }
-                    formFunc.txtComboPeli.setSelectedIndex(Integer.parseInt(conFormFunc.getPelis()[index][2]));
+                    formFunc.txtComboPeli.setSelectedIndex(Integer.parseInt(conFormFunc.getPelis()[index][2])-1);
                     formFunc.txtComboSala.setSelectedItem(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 1)));
                     formFunc.txtFechaIni.setDate(fechaI);
                     formFunc.txtFechaFin.setDate(fechaF);

@@ -192,6 +192,7 @@ public class ConAdmFormSalas extends ControladorPrincipal implements MouseListen
             }
         }
     }
+    //función que convierte de int a char 
     private String getLetra(int i) {
         return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
     }
