@@ -37,37 +37,16 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
     public float precio;
     public String nombre;
     public String Descripcion;
-    ArrayList<String> productos;
+    ArrayList productos;
     DefaultListModel listaModel = new DefaultListModel();
     AdmAddProduct vistaP = new AdmAddProduct();
 
-    public ConAdmFormCombos(AdmFormCombos vista, ModAdmFormCombos modelo, float precio, String nombre, String Descripcion) {
-        this.vista = vista;
-        this.modelo = modelo;
-        this.precio = precio;
-        this.nombre = nombre;
-        this.Descripcion = Descripcion;
-    }
 
     public ConAdmFormCombos(AdmFormCombos vista, ModAdmFormCombos modelo) {
         this.vista = vista;
         this.modelo = modelo;
     }
     
-    
-    public static void main(String args[])
-    {
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                ModAdmFormCombos modelo = new ModAdmFormCombos();
-                AdmFormCombos vista = new AdmFormCombos();
-                ConAdmFormCombos con = new ConAdmFormCombos(vista, modelo);
-                con.iniciarVista();
-            }
-        });
-    }
     
     //para iniciar la vista
     @Override
@@ -105,7 +84,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
     public void mouseClicked(MouseEvent e) {
          if (vista.panelAddProductos==e.getSource()) {
              //Para cuando agregue productos
-            ConAdmAddProduct controlP = new ConAdmAddProduct(vistaP, modelo, vista.listProductos.getModel(), vista);
+            ConAdmAddProduct controlP = new ConAdmAddProduct(vistaP,modelo,1);
             controlP.iniciarVista();
         }else if (vista.panelAdd==e.getSource()) {
              setDescripcion(vista.listProductos.getSelectedValue());
@@ -150,6 +129,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
             cantidad = (int)cant.intValue();
             producto = String.valueOf(vistaP.comboProducto.getSelectedItem());
             String nProducto = ("x"+cantidad+" "+producto);
+            
             if (cantidad <= 0 && !"".equals(producto)) {
                 GenAlert vistaAlert = new GenAlert();
                 ConAlert alert = new ConAlert(vistaAlert, "Por favor", "rellene todos los campos");

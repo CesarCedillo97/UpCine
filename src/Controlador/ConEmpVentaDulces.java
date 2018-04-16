@@ -10,6 +10,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import modelo.ModEmpVentaDulces;
 import vista.EmpVentaDulces;
+import Vista.AdmAddProduct;
+import Controlador.ConAdmAddProduct;
+import Modelo.ModAdmFormCombos;
+import java.util.ArrayList;
+import vista.GenAlert;
+import Vista.EmpOpcVentaDulces;
+import Controlador.ConEmpOpcVentaDulces;
 /**
  *
  * @author Cesar Cedillo
@@ -17,8 +24,13 @@ import vista.EmpVentaDulces;
 public class ConEmpVentaDulces extends ControladorPrincipal implements MouseListener{
     ModEmpVentaDulces modelo;
     EmpVentaDulces vista;
-     
+    AdmAddProduct vistaPro = new AdmAddProduct();
+    ModAdmFormCombos modPro = new ModAdmFormCombos();
+    ArrayList precio = new ArrayList();
+    ArrayList cant = new ArrayList();
+    ArrayList nombre = new ArrayList();
     DefaultListModel listaModel = new DefaultListModel();
+    EmpOpcVentaDulces vistaOPC = new EmpOpcVentaDulces();
     
     private int idEmp;
     private float subTotal;
@@ -26,6 +38,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
     private float descuento;
     private float total;
     private int idCliente;
+    private int opc;
 
     public ConEmpVentaDulces(ModEmpVentaDulces modVentaDulces, EmpVentaDulces empVentaDulces, int idEmp)
     {
@@ -49,17 +62,26 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         vista.lblDescuento.setText(String.valueOf(0.0f));
         vista.lblSubTotal.setText(String.valueOf(0.0f));
         vista.lblIVA.setText(String.valueOf(0.0f));
+        vista.lblCliente.setText("N/A");
+        vista.lblPuntos.setText("0");
+        
+        
         
         //para los paneles
-        vista.panelAceptar.addMouseListener(this);
+        vista.panelProceder.addMouseListener(this);
         vista.panelAdd.addMouseListener(this);
-        vista.panelCancelar.addMouseListener(this);
+        vista.panelCancelarVenta.addMouseListener(this);
         vista.panelDelete.addMouseListener(this);
+        vistaPro.panelAceptar.addMouseListener(this);
+        vistaPro.panelCancelar.addMouseListener(this);
+        vistaOPC.panelCombo.addMouseListener(this);
+        vistaOPC.panelProductos.addMouseListener(this);
         
         //para la lista
         vista.listaProductos.setModel(listaModel);
         
         //para la tabla
+        //vista.tablaVentas.setModel(modelo.mTabla());
         
         
         
@@ -71,11 +93,97 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         }else
             return false;
     }
+    
+    public void ActualizarLista(){
+        listaModel.clear();
+        for (int i = 0;  i<cant.size() ; i++) {
+            String Lista = ""+cant.get(i)+"X  "+nombre.get(i)+"";
+            listaModel.addElement(Lista);
+            
+        }
+        
+    }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if (vista.panelBack == e.getSource()) {
             vista.dispose();
+        }else if (vista.panelProceder == e.getSource()) {
+            
+            
+        }else if (vista.panelCancelarVenta == e.getSource()) {
+            
+        }else if (vista.panelDelete == e.getSource()) {
+            int pos = vista.listaProductos.getSelectedIndex();
+            if (quitarV(pos)) {
+                 cant.remove(pos);
+                 nombre.remove(pos);
+                 ActualizarLista();
+                 resetColor(vista.panelDelete);
+             }else{
+                GenAlert vistaAlert = new GenAlert();
+                ConAlert alert = new ConAlert(vistaAlert,"Alerta", "No hay registro seleccionado");
+                alert.iniciarVista();
+             }
+            
+        }else if (vista.panelAdd == e.getSource()) {
+            
+            ConEmpOpcVentaDulces conVen = new ConEmpOpcVentaDulces(vistaOPC,modPro,vistaPro);
+            
+            conVen.iniciarVista();
+            //esto es para saber si esta eligiendo producto o combos
+        }else if (vistaPro.panelAceptar==e.getSource()) { //para los botones de la ventana add
+            
+            //aqui se asigan valores
+            int cantidad = (int)vistaPro.sCantidad.getValue();
+            String nombrePro = String.valueOf(vistaPro.comboProducto.getSelectedItem());
+            
+            if (cantidad == 0){
+               GenAlert vistaAlert = new GenAlert();
+                ConAlert alert = new ConAlert(vistaAlert, "Por favor", "rellene todos los campos");
+                alert.iniciarVista();
+            
+            }else{
+                if (this.opc == 1) {
+                    cant.add((int)vistaPro.sCantidad.getValue());
+                    nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
+                    precio.add((float)modelo.obtenerPrecioCom(nombrePro));
+
+                    ActualizarLista();
+                    resetColor(vistaPro.panelAceptar);
+                    resetColor(vistaPro.panelCancelar);
+                    vistaPro.dispose();
+                    vistaOPC.dispose();
+                }else if (this.opc == 2) {
+                    
+                    cant.add((int)vistaPro.sCantidad.getValue());
+                    nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
+                    precio.add((float)modelo.obtenerPrecioPro(nombrePro));
+
+                    ActualizarLista();
+                    resetColor(vistaPro.panelAceptar);
+                    resetColor(vistaPro.panelCancelar);
+                    vistaPro.dispose();
+                    vistaOPC.dispose();
+                }
+            
+            
+                
+            }
+            
+        }else if (vistaPro.panelCancelar ==e.getSource()) {//para los botones de la ventana add
+            resetColor(vistaPro.panelAceptar);
+            resetColor(vistaPro.panelCancelar);
+            vistaPro.dispose();
+            vistaOPC.dispose();
+        }
+        else if (vistaOPC.panelCombo==e.getSource()) {
+            this.opc=1;
+        }
+        else if (vistaOPC.panelProductos==e.getSource()) {
+            this.opc=2;
+            
         }
     }
 
@@ -91,6 +199,19 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
     public void mouseEntered(MouseEvent e) {
         if (vista.panelBack == e.getSource()) {
             setColor(vista.panelBack);
+        }else if (vista.panelProceder == e.getSource()) {
+            setColorAceptar(vista.panelProceder);
+        }else if (vista.panelCancelarVenta == e.getSource()) {
+            setColorCancelar(vista.panelCancelarVenta);
+        }else if (vista.panelDelete == e.getSource()) {
+            setColorCancelar(vista.panelDelete);
+        }else if (vista.panelAdd == e.getSource()) {
+            setColorAceptar(vista.panelAdd);
+        }else if (vistaPro.panelCancelar ==e.getSource()) {//para los botones de la ventana add
+            setColorCancelar(vistaPro.panelCancelar);
+        }
+        else if (vistaPro.panelAceptar ==e.getSource()) {//para los botones de la ventana add
+            setColorAceptar(vistaPro.panelAceptar);
         }
     }
 
@@ -98,6 +219,19 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
     public void mouseExited(MouseEvent e) {
         if (vista.panelBack == e.getSource()) {
             resetColorSalir(vista.panelBack);
+        }else if (vista.panelProceder == e.getSource()) {
+            resetColor(vista.panelProceder);
+        }else if (vista.panelCancelarVenta == e.getSource()) {
+            resetColor(vista.panelCancelarVenta);
+        }else if (vista.panelDelete == e.getSource()) {
+            resetColor(vista.panelDelete);
+        }else if (vista.panelAdd == e.getSource()) {
+            resetColor(vista.panelAdd);
+        }else if (vistaPro.panelCancelar ==e.getSource()) {//para los botones de la ventana add
+            resetColor(vistaPro.panelCancelar);
+        }
+        else if (vistaPro.panelAceptar ==e.getSource()) {//para los botones de la ventana add
+            resetColor(vistaPro.panelAceptar);
         }
     }
 

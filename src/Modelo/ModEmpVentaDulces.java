@@ -20,14 +20,9 @@ public class ModEmpVentaDulces {
     String consulta;
     private final Conexion conexion = new Conexion();
     
-    public DefaultTableModel mTabla(int opc){
-        switch(opc){
-            case 1:
-                consulta = "select fecha, nombre, ";
-                break;
-            case 2:
-                break;
-        }
+    public DefaultTableModel mTabla(){
+        consulta = "select Fecha, Nombre, Total from empleado,venta where empleado = empleado_IdEmpleado and Tipo = '1' ";
+        
         try {
             //Para abrir la conexion a la BD
             Connection con = conexion.abrirConexion();
@@ -65,9 +60,44 @@ public class ModEmpVentaDulces {
                 conexion.cerrarConexion(con);
             }
         } catch (SQLException e) {
+            
             return null;
         }
     }
+    
+   public float obtenerPrecioCom(String nombre){
+       float precio=0;
+       try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select precio from combos where '"+nombre+"' = nombre");
+            rs.last();
+            precio = rs.getFloat("precio");
+            
+            conexion.cerrarConexion(con);
+            return precio;
+        }
+        catch(SQLException e){
+            return precio;
+        }
+   }
+   
+   public float obtenerPrecioPro(String nombre){
+       float precio=0;
+       try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select Precio_venta from producto where '"+nombre+"' = Descripcion");
+            rs.last();
+            precio = rs.getFloat("Precio_venta");
+            
+            conexion.cerrarConexion(con);
+            return precio;
+        }
+        catch(SQLException e){
+            return precio;
+        }
+   }
 }
     
 

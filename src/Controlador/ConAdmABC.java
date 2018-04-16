@@ -39,6 +39,11 @@ import modelo.ModAdmFormCompras;
 import vista.AdmFormCompras;
 import Vista.AdmOpcProductos;
 import Controlador.ConAdmOpcProductos;
+import Vista.AdmFormCombos;
+import Modelo.ModAdmFormCombos;
+import Controlador.ConAdmFormCombos;
+
+
 
 
 /**
@@ -102,6 +107,10 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
             case 9:
                 visAdmABC.lblMenu.setText("Combos");
                 visAdmABC.tabla.setModel(modAdmABC.consulta(9));
+                break;
+            case 10:
+                visAdmABC.lblMenu.setText("Ventas");
+                visAdmABC.tabla.setModel(modAdmABC.consulta(10));
                 break;
         }
        
@@ -193,7 +202,16 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                     AdmFormCompras formCompras = new AdmFormCompras();
                     ConAdmFormCompras conFormCompras = new ConAdmFormCompras(modFormCompras, formCompras, 1, idEmp);
                     conFormCompras.iniciarVista();
-                    break;       
+                    break;      
+                case 9:
+                    ModAdmFormCombos modFormPro = new ModAdmFormCombos();
+                    AdmFormCombos formCombos = new AdmFormCombos();
+                    ConAdmFormCombos conFormcombos = new ConAdmFormCombos(formCombos, modFormPro);
+                    conFormcombos.iniciarVista();
+                    break; 
+                case 10:
+                    
+                    break; 
             }
         }
         

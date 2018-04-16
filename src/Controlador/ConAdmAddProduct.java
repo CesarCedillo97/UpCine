@@ -24,43 +24,60 @@ public class ConAdmAddProduct extends ControladorPrincipal{
    ModAdmFormCombos modelo;
    AdmFormCombos vistaAnt;
    Object list;
-   
-   
+
+    public int getOpc() {
+        return opc;
+    }
+
+    public void setOpc(int opc) {
+        this.opc = opc;
+    }
+   public int opc;
    
    private String Producto;
    private int Cantidad;
    
 
-    public ConAdmAddProduct(AdmAddProduct vista, ModAdmFormCombos modelo, Object modeloLista, AdmFormCombos vistaAnt) {
+    public ConAdmAddProduct(AdmAddProduct vista, ModAdmFormCombos modelo, int opc) {
         this.vista = vista;
         this.modelo = modelo;
-        this.list = modeloLista;
-        this.vistaAnt = vistaAnt;
-    }
-    
-    public ConAdmAddProduct(AdmAddProduct vista, ModAdmFormCombos modelo) {
-        this.vista = vista;
-        this.modelo = modelo;
+        this.opc = opc;
     }
 
-   
-    
     @Override
     public void iniciarVista() {
         vista.setTitle("Agregar producto al combo");
         vista.pack();
         vista.setLocationRelativeTo(null);
-        vista.setVisible(true);
-        //vista.panelAceptar.addMouseListener(this);
-        //vista.panelCancelar.addMouseListener(this);
+        vista.setVisible(true);  
+        vista.lblOpc.setText(String.valueOf(this.opc));
+
         
-        //PARA EL COMBO BOX
-        String[] productos = modelo.obtenerProductos();
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for (String pro : productos){
-            model.addElement(pro);
+        switch(this.opc){
+            //PAra solo produtos
+            case 1:
+                //PARA EL COMBO BOX
+                String[] productos = modelo.obtenerCombos();
+                DefaultComboBoxModel model = new DefaultComboBoxModel();
+                for (String pro : productos){
+                    model.addElement(pro);
+                }
+                vista.comboProducto.setModel(model);
+                break;
+                //para combos y productos
+            case 2: 
+                //PARA EL COMBO BOX
+                String[] combos = modelo.obtenerProductos();
+                DefaultComboBoxModel modelito = new DefaultComboBoxModel();
+                for (String pro : combos){
+                    modelito.addElement(pro);
+                }
+                vista.comboProducto.setModel(modelito);
+                break;
+            
         }
-        vista.comboProducto.setModel(model);
+        
+        
         
         //PARA EL SPINNER
         SpinnerNumberModel modeloSpinner = new SpinnerNumberModel( 

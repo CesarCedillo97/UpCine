@@ -49,6 +49,29 @@ public class ModAdmFormCombos {
                 arrayPelis[x] = rs.getString("Descripcion");
                 x++;
             }
+            conexion.cerrarConexion(con);
+            return arrayPelis;
+        }
+        catch(SQLException e){
+            return null;
+        }
+    }
+    
+    public String[] obtenerCombos(){
+        try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select nombre from combos");
+            rs.last();
+            int rows = rs.getRow();
+            rs.beforeFirst();
+            String[] arrayPelis = new String[rows];
+            int x =0 ;
+            while(rs.next()){
+                arrayPelis[x] = rs.getString("nombre");
+                x++;
+            }
+            conexion.cerrarConexion(con);
             return arrayPelis;
         }
         catch(SQLException e){

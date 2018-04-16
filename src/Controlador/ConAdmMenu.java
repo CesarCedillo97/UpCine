@@ -51,6 +51,7 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
         this.AdmMenu.panelProveedores.addMouseListener((MouseListener) this);
         this.AdmMenu.panelCompras.addMouseListener((MouseListener) this);
         this.AdmMenu.panelCerrarSesion.addMouseListener((MouseListener) this);
+        this.AdmMenu.panelVentas.addMouseListener(this);
     }
     
     @Override
@@ -84,6 +85,9 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
             }
             else if (AdmMenu.panelCompras == e.getSource()) {
                 conAdmABC = new ConAdmABC(modAdmABC, visAdmABC, idEmp, 8);
+            }
+            else if (AdmMenu.panelVentas == e.getSource()) {
+                conAdmABC = new ConAdmABC(modAdmABC, visAdmABC, idEmp, 10);
             }
             else if(AdmMenu.panelCerrarSesion == e.getSource()){
                 AdmMenu.dispose();
@@ -138,6 +142,9 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
         else if(AdmMenu.panelCompras == e.getSource()){
             setColor(AdmMenu.panelCompras);
         }
+        if (AdmMenu.panelVentas==e.getSource()) {
+            setColor(AdmMenu.panelVentas);
+        }
         else if (AdmMenu.panelCerrarSesion==e.getSource()) {
             setColor(AdmMenu.panelCerrarSesion);
         }
@@ -169,6 +176,9 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
         }
         else if(AdmMenu.panelCompras == e.getSource()){
             resetColor(AdmMenu.panelCompras);
+        }
+        else if (AdmMenu.panelVentas==e.getSource()) {
+            resetColor(AdmMenu.panelVentas);
         }
         else if (AdmMenu.panelCerrarSesion==e.getSource()) {
             resetColorSalir(AdmMenu.panelCerrarSesion);

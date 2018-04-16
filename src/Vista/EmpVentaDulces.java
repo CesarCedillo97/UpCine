@@ -56,12 +56,16 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         lblDescuento = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
-        panelCancelar = new javax.swing.JPanel();
+        panelCancelarVenta = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        panelAceptar = new javax.swing.JPanel();
+        panelProceder = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        lblCliente = new javax.swing.JLabel();
+        lblPuntos = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,26 +124,28 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(panelBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(341, 341, 341)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(44, 44, 44))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(panelBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 16, Short.MAX_VALUE))
+                    .addComponent(jLabel4))
+                .addGap(14, 14, 14))
         );
 
         jPanel3.setBackground(new java.awt.Color(25, 116, 232));
 
+        tablaVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -179,16 +185,23 @@ public class EmpVentaDulces extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(25, 116, 232));
 
-        listaProductos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listaProductos);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Artículos");
+
+        panelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelDeleteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelDeleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelDeleteMouseExited(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(179, 35, 35));
@@ -210,6 +223,18 @@ public class EmpVentaDulces extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addGap(21, 21, 21))
         );
+
+        panelAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAddMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelAddMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelAddMouseExited(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(25, 116, 232));
@@ -274,15 +299,15 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         );
 
         jLabel3.setBackground(new java.awt.Color(25, 116, 232));
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(25, 116, 232));
         jLabel3.setText("Subtotal:");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(25, 116, 232));
         jLabel5.setText("IVA:");
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(25, 116, 232));
         jLabel6.setText("Descuento:");
 
@@ -303,15 +328,15 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         lblTotal.setForeground(new java.awt.Color(25, 116, 232));
         lblTotal.setText("0");
 
-        panelCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelCancelarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelCancelarMouseClicked(evt);
+                panelCancelarVentaMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelCancelarMouseEntered(evt);
+                panelCancelarVentaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelCancelarMouseExited(evt);
+                panelCancelarVentaMouseExited(evt);
             }
         });
 
@@ -319,32 +344,32 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(179, 35, 35));
         jLabel11.setText("Cancelar venta");
 
-        javax.swing.GroupLayout panelCancelarLayout = new javax.swing.GroupLayout(panelCancelar);
-        panelCancelar.setLayout(panelCancelarLayout);
-        panelCancelarLayout.setHorizontalGroup(
-            panelCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCancelarLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelCancelarVentaLayout = new javax.swing.GroupLayout(panelCancelarVenta);
+        panelCancelarVenta.setLayout(panelCancelarVentaLayout);
+        panelCancelarVentaLayout.setHorizontalGroup(
+            panelCancelarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCancelarVentaLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel11)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
-        panelCancelarLayout.setVerticalGroup(
-            panelCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCancelarLayout.createSequentialGroup()
+        panelCancelarVentaLayout.setVerticalGroup(
+            panelCancelarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCancelarVentaLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelProceder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelAceptarMouseClicked(evt);
+                panelProcederMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelAceptarMouseEntered(evt);
+                panelProcederMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelAceptarMouseExited(evt);
+                panelProcederMouseExited(evt);
             }
         });
 
@@ -352,18 +377,18 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(25, 116, 232));
         jLabel12.setText("Proceder al pago");
 
-        javax.swing.GroupLayout panelAceptarLayout = new javax.swing.GroupLayout(panelAceptar);
-        panelAceptar.setLayout(panelAceptarLayout);
-        panelAceptarLayout.setHorizontalGroup(
-            panelAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAceptarLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelProcederLayout = new javax.swing.GroupLayout(panelProceder);
+        panelProceder.setLayout(panelProcederLayout);
+        panelProcederLayout.setHorizontalGroup(
+            panelProcederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProcederLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel12)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        panelAceptarLayout.setVerticalGroup(
-            panelAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAceptarLayout.createSequentialGroup()
+        panelProcederLayout.setVerticalGroup(
+            panelProcederLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProcederLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel12)
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -373,15 +398,49 @@ public class EmpVentaDulces extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel16.setText("Cliente:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel17.setText("Puntos:");
+
+        lblCliente.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblCliente.setForeground(new java.awt.Color(25, 116, 232));
+        lblCliente.setText("N/A");
+
+        lblPuntos.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblPuntos.setForeground(new java.awt.Color(25, 116, 232));
+        lblPuntos.setText("0");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPuntos))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(87, 87, 87)
+                        .addComponent(lblCliente)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 143, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(lblCliente))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(lblPuntos))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
@@ -427,11 +486,11 @@ public class EmpVentaDulces extends javax.swing.JFrame {
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(59, 59, 59))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(panelCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panelCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTotal)
-                                    .addComponent(panelAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(panelProceder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -452,13 +511,13 @@ public class EmpVentaDulces extends javax.swing.JFrame {
                                 .addComponent(lblIVA)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -481,10 +540,10 @@ public class EmpVentaDulces extends javax.swing.JFrame {
                             .addComponent(lblTotal))
                         .addGap(71, 71, 71)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panelAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(panelProceder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelCancelarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(77, 77, 77))
+                .addGap(10, 10, 10))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -495,7 +554,9 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -513,29 +574,53 @@ public class EmpVentaDulces extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_panelBackMouseExited
 
-    private void panelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCancelarMouseClicked
+    private void panelCancelarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCancelarVentaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelCancelarMouseClicked
+    }//GEN-LAST:event_panelCancelarVentaMouseClicked
 
-    private void panelCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCancelarMouseEntered
+    private void panelCancelarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCancelarVentaMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelCancelarMouseEntered
+    }//GEN-LAST:event_panelCancelarVentaMouseEntered
 
-    private void panelCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCancelarMouseExited
+    private void panelCancelarVentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCancelarVentaMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelCancelarMouseExited
+    }//GEN-LAST:event_panelCancelarVentaMouseExited
 
-    private void panelAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAceptarMouseExited
+    private void panelProcederMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProcederMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelAceptarMouseExited
+    }//GEN-LAST:event_panelProcederMouseExited
 
-    private void panelAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAceptarMouseEntered
+    private void panelProcederMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProcederMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelAceptarMouseEntered
+    }//GEN-LAST:event_panelProcederMouseEntered
 
-    private void panelAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAceptarMouseClicked
+    private void panelProcederMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProcederMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelAceptarMouseClicked
+    }//GEN-LAST:event_panelProcederMouseClicked
+
+    private void panelAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAddMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelAddMouseClicked
+
+    private void panelAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAddMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelAddMouseEntered
+
+    private void panelAddMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAddMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelAddMouseExited
+
+    private void panelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDeleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelDeleteMouseClicked
+
+    private void panelDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDeleteMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelDeleteMouseEntered
+
+    private void panelDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDeleteMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelDeleteMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -545,6 +630,8 @@ public class EmpVentaDulces extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -562,16 +649,18 @@ public class EmpVentaDulces extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JLabel labelTotal;
+    public javax.swing.JLabel lblCliente;
     public javax.swing.JLabel lblDescuento;
     public javax.swing.JLabel lblIVA;
+    public javax.swing.JLabel lblPuntos;
     public javax.swing.JLabel lblSubTotal;
     public javax.swing.JLabel lblTotal;
     public javax.swing.JList<String> listaProductos;
-    public javax.swing.JPanel panelAceptar;
     public javax.swing.JPanel panelAdd;
     public javax.swing.JPanel panelBack;
-    public javax.swing.JPanel panelCancelar;
+    public javax.swing.JPanel panelCancelarVenta;
     public javax.swing.JPanel panelDelete;
+    public javax.swing.JPanel panelProceder;
     public javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 
