@@ -84,7 +84,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
     public void mouseClicked(MouseEvent e) {
          if (vista.panelAddProductos==e.getSource()) {
              //Para cuando agregue productos
-            ConAdmAddProduct controlP = new ConAdmAddProduct(vistaP,modelo,1);
+            ConAdmAddProduct controlP = new ConAdmAddProduct(vistaP,modelo,2);
             controlP.iniciarVista();
         }else if (vista.panelAdd==e.getSource()) {
              setDescripcion(vista.listProductos.getSelectedValue());

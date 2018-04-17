@@ -58,7 +58,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         vista.panelBack.addMouseListener(this);
         
         //Para poner os valores en cero
-        vista.labelTotal.setText(String.valueOf(0.0f));
+        vista.lblx.setText(String.valueOf(0.0f));
         vista.lblDescuento.setText(String.valueOf(0.0f));
         vista.lblSubTotal.setText(String.valueOf(0.0f));
         vista.lblIVA.setText(String.valueOf(0.0f));
@@ -81,7 +81,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         vista.listaProductos.setModel(listaModel);
         
         //para la tabla
-        //vista.tablaVentas.setModel(modelo.mTabla());
+        vista.tablaVentas.setModel(modelo.mTabla());
         
         
         
@@ -105,12 +105,14 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
     }
     
     public void ActualizarPrecios(){
+        this.subTotal=0;
+        this.total=0;
          for (int i = 0;  i<cant.size() ; i++) {
             this.subTotal=(this.subTotal+(float)precio.get(i));
         }
          this.total=((this.subTotal+(this.subTotal*this.descuento)));
          vista.lblSubTotal.setText(String.valueOf(this.subTotal));
-         vista.labelTotal.setText(String.valueOf(this.total));
+         vista.lblx.setText(String.valueOf(this.total));
     }
     
 
@@ -128,7 +130,9 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
             if (quitarV(pos)) {
                  cant.remove(pos);
                  nombre.remove(pos);
+                 precio.remove(pos);
                  ActualizarLista();
+                 ActualizarPrecios();
                  resetColor(vista.panelDelete);
              }else{
                 GenAlert vistaAlert = new GenAlert();
@@ -154,7 +158,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                 alert.iniciarVista();
             
             }else{
-                if (this.opc == 2) {
+                if (this.opc == 1) {
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
                     precio.add((float)modelo.obtenerPrecioCom(nombrePro));
@@ -165,7 +169,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                     resetColor(vistaPro.panelCancelar);
                     vistaPro.dispose();
                     vistaOPC.dispose();
-                }else if (this.opc == 1) {
+                }else if (this.opc == 2) {
                     
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));

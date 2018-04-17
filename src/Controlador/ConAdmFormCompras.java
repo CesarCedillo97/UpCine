@@ -71,7 +71,7 @@ public class ConAdmFormCompras extends ControladorPrincipal implements MouseList
     {
         if(formCompras.panelAddProductos == e.getSource()){
             ModAdmFormCombos modAddProduct = new ModAdmFormCombos();
-            ConAdmAddProduct conAddProduct = new ConAdmAddProduct(addProduct, modAddProduct,1);
+            ConAdmAddProduct conAddProduct = new ConAdmAddProduct(addProduct, modAddProduct,2);
             conAddProduct.iniciarVista();
         }
         else if(formCompras.panelEliminarProductos == e.getSource()){

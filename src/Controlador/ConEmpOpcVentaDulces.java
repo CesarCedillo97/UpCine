@@ -49,6 +49,7 @@ public class ConEmpOpcVentaDulces extends ControladorPrincipal implements MouseL
     public void mouseClicked(MouseEvent e) {
         if (vista.panelCombo == e.getSource()) {
             ConAdmAddProduct conPro= new ConAdmAddProduct(this.vistaPro, this.modPro, 1);
+            
             conPro.iniciarVista();
         }else if (vista.panelProductos == e.getSource()) {
             ConAdmAddProduct conPro= new ConAdmAddProduct(this.vistaPro, this.modPro,2);

@@ -21,7 +21,7 @@ public class ModEmpVentaDulces {
     private final Conexion conexion = new Conexion();
     
     public DefaultTableModel mTabla(){
-        consulta = "select Fecha, Nombre, Total from empleado,venta where empleado = empleado_IdEmpleado and Tipo = '1' ";
+        consulta = "select Fecha, Nombre, Total from empleado,venta where IdEmpleado = empleado_IdEmpleado and TipoVenta=2 ";
         
         try {
             //Para abrir la conexion a la BD
