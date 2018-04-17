@@ -14,8 +14,10 @@ import vista.GenAlert;
  */
 public abstract class ControladorPrincipal 
 {
-    public abstract void iniciarVista();
+    public abstract void iniciarVista();//para inciar la vista
     
+    
+    //TODO ESTO ES PARA DARLE COLOR A LOS PANELES CUANDO PASAS SOBRE ELLOS:
     public void setColor(JPanel panel){
         panel.setBackground(new java.awt.Color(115, 163, 239));
     }

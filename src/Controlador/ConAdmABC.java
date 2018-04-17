@@ -71,6 +71,8 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
     @Override
     public void iniciarVista()
     {
+        //DEPENDIENDO DE EL PANEL QUE SE HAYA SELECCIONADO
+        //CARGA UN MODELO DE TABLA DIFERENTE Y SE LE AGREGAR UN TITULO DIFERENTE
         switch(opcion){
             case 1:
                 visAdmABC.lblMenu.setText("Empleados");
@@ -133,14 +135,14 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (visAdmABC.panelBack == e.getSource()) {
-            if (this.opcion==4 || this.opcion == 9) {
+        if (visAdmABC.panelBack == e.getSource()) {//ES PARA REGRESAR A LA VENTANA ANTERIOR
+            if (this.opcion==4 || this.opcion == 9) {//ES PARA REGRESAR A LA VENTANA DE OPCION DE PRODUCTOS
             AdmOpcProductos vistaPro = new AdmOpcProductos();
             ConAdmOpcProductos controlPro = new ConAdmOpcProductos(vistaPro, idEmp);
             visAdmABC.dispose();
             controlPro.iniciarVista();
             visAdmABC.dispose();
-            }else{
+            }else{ //ES PARA REGRESAR A EL MENU DEL ADMINISTRADOR
             AdmMenu menuVista = new AdmMenu();
             ModAdmMenu menuMod = new ModAdmMenu();
             ConAdmMenu menuControl = new ConAdmMenu(menuMod, menuVista, idEmp);
@@ -150,14 +152,14 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
             }
             
         }
-        else if(visAdmABC.tabla == e.getSource()){
+        else if(visAdmABC.tabla == e.getSource()){ //ESTO ES PARA CAMBIAR EL COLOR DE LOS ICONOS CUANDO SE HAYA SELECCIONADO UN REGISTRO DE LA TABLA
             this.fila = visAdmABC.tabla.rowAtPoint(e.getPoint());
             visAdmABC.lblModi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Edit_File_48px.png")));
             visAdmABC.txtModi.setForeground(new Color(25,116,232));
             visAdmABC.lblElim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Delete_Document_52px.png")));
             visAdmABC.txtElim.setForeground(new Color(25,116,232));
         }
-        else if(visAdmABC.panelAdd == e.getSource()){
+        else if(visAdmABC.panelAdd == e.getSource()){ //PARA AGREGRA UN NUEVO REGISTRO SEGUN EL PANEL QUE SE HAYA SELECCIONADO
             switch(opcion){
                 case 1: //empleados
                     ModAdmFormEmpleados modAdmFormEmp = new ModAdmFormEmpleados();
@@ -215,11 +217,11 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
             }
         }
         
-        else if(visAdmABC.panelEli == e.getSource() && fila != -1){
+        else if(visAdmABC.panelEli == e.getSource() && fila != -1){//PARA ABRIR UNA VENTANA Y PREGUNTAR SI ESTÁS SEGURO DE ELIMINAR
             conConfirm.iniciarVista();
         }
         
-        else if(visAdmABC.panelModi == e.getSource() && fila != -1){
+        else if(visAdmABC.panelModi == e.getSource() && fila != -1){ //PARA MODIFICAR UN NUEVO REGISTRO SEGUN EL PANEL QUE SE HAYA SELECCIONADO
             switch(opcion){
                 case 1: //empleado                
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -355,7 +357,7 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                     
             }
         }
-        else if(genConfirm.panelAceptar == e.getSource()){
+        else if(genConfirm.panelAceptar == e.getSource()){ //PARA ELIMINAR UN NUEVO REGISTRO SEGUN EL PANEL QUE SE HAYA SELECCIONADO
             int id;
             switch(opcion){
                 case 1: //empleados

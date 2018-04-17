@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import vista.GenAlert;
 import Vista.EmpOpcVentaDulces;
 import Controlador.ConEmpOpcVentaDulces;
+import controlador.ConConfirm;
+import vista.GenConfirm;
 /**
  *
  * @author Cesar Cedillo
@@ -86,7 +88,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         
         
     }
-    
+    // este metodo verifica si está algun elemento de la lista seleccionada
     public boolean quitarV(int pos){
         if (pos != -1) {
             return true;
@@ -94,6 +96,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
             return false;
     }
     
+    //este metodo actualiza la lista
     public void ActualizarLista(){
         listaModel.clear();
         for (int i = 0;  i<cant.size() ; i++) {
@@ -104,28 +107,36 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         
     }
     
+    //Este metodo Actualiza los precios
     public void ActualizarPrecios(){
-        this.subTotal=0;
-        this.total=0;
+        setSubTotal(0);
+        setTotal(0);
          for (int i = 0;  i<cant.size() ; i++) {
-            this.subTotal=(this.subTotal+(float)precio.get(i));
+             setSubTotal((getSubTotal()+(float)precio.get(i)));
         }
-         this.total=((this.subTotal+(this.subTotal*this.descuento)));
-         vista.lblSubTotal.setText(String.valueOf(this.subTotal));
-         vista.lblx.setText(String.valueOf(this.total));
+         setTotal(((getSubTotal()+(getSubTotal()*getDescuento()))));
+         vista.lblSubTotal.setText(String.valueOf(getSubTotal()));
+         vista.lblx.setText(String.valueOf(getTotal()));
     }
     
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (vista.panelBack == e.getSource()) {
+        if (vista.panelBack == e.getSource()) { //para el caso de que quiera salir de vender dulces
             vista.dispose();
-        }else if (vista.panelProceder == e.getSource()) {
+        }else if (vista.panelProceder == e.getSource()) {//cuando registra todos los productos y quiere continuar al pago
+            if (getTotal()!=0) {
+                
+            }
             
+        }else if (vista.panelCancelarVenta == e.getSource()) {//para cancela la venta y limpiar todos los campos
+            cant.clear();
+            precio.clear();
+            nombre.clear();
+            ActualizarLista();
+            ActualizarPrecios();
             
-        }else if (vista.panelCancelarVenta == e.getSource()) {
-            
-        }else if (vista.panelDelete == e.getSource()) {
+        }else if (vista.panelDelete == e.getSource()) { //para eliminar el campo seleccionado de la tabla
             int pos = vista.listaProductos.getSelectedIndex();
             if (quitarV(pos)) {
                  cant.remove(pos);
@@ -140,7 +151,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                 alert.iniciarVista();
              }
             
-        }else if (vista.panelAdd == e.getSource()) {
+        }else if (vista.panelAdd == e.getSource()) { //para agregar un producto nuevo a la lista y a la venta
             
             ConEmpOpcVentaDulces conVen = new ConEmpOpcVentaDulces(vistaOPC,modPro,vistaPro);
             
@@ -158,7 +169,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                 alert.iniciarVista();
             
             }else{
-                if (this.opc == 1) {
+                if (getOpc() == 1) { //con esto obtiene los productos que hay
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
                     precio.add((float)modelo.obtenerPrecioCom(nombrePro));
@@ -169,7 +180,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                     resetColor(vistaPro.panelCancelar);
                     vistaPro.dispose();
                     vistaOPC.dispose();
-                }else if (this.opc == 2) {
+                }else if (getOpc() == 2) { //con esto obtienes todos los combos que hay
                     
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
@@ -193,13 +204,15 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
             vistaOPC.dispose();
         }
         else if (vistaOPC.panelCombo==e.getSource()) {
-            this.opc=1;
+            setOpc(1);
         }
         else if (vistaOPC.panelProductos==e.getSource()) {
-            this.opc=2;
+            setOpc(2);
             
         }
     }
+
+    
 
     @Override
     public void mousePressed(MouseEvent me) {
@@ -331,5 +344,13 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
      */
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+    
+    public int getOpc() {
+        return opc;
+    }
+
+    public void setOpc(int opc) {
+        this.opc = opc;
     }
 }
