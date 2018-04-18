@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador para realizar venta de dulces
  */
 package controlador;
 import java.awt.event.MouseEvent;
@@ -11,14 +9,11 @@ import javax.swing.JFrame;
 import modelo.ModEmpVentaDulces;
 import vista.EmpVentaDulces;
 import Vista.AdmAddProduct;
-import Controlador.ConAdmAddProduct;
 import Modelo.ModAdmFormCombos;
 import java.util.ArrayList;
 import vista.GenAlert;
 import Vista.EmpOpcVentaDulces;
 import Controlador.ConEmpOpcVentaDulces;
-import controlador.ConConfirm;
-import vista.GenConfirm;
 /**
  *
  * @author Cesar Cedillo

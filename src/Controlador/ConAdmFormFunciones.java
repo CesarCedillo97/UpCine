@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador para agregar y modificar funciones
  */
 package controlador;
 
@@ -59,7 +57,7 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
         genSuccess.panelAceptar.addMouseListener((MouseListener) this);
         vista.setVisible(true);
     }
-    
+    //Carga los datos a los comboBox 
     public void cargarCombos(){
         pelis = modelo.obtenerPeliculas();
         salas = modelo.obtenerSalas();
@@ -71,6 +69,7 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
         if(salas != null)
             vista.txtComboSala.setModel(new javax.swing.DefaultComboBoxModel(salas));
     }
+    //Calcula la hora de terminación de la pelicula y lo asigna a txtHoraFin
     public String setValueTxtHoraFin(){
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         String[] arrayHora = vista.txtHoraInicio.getValue().toString().split(" ");
@@ -80,7 +79,7 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
             Date dt = df.parse(hora);
             int selectedIndex = vista.txtComboPeli.getSelectedIndex();
             int duracion = Integer.parseInt(pelis[selectedIndex][1]);
-            dt.setTime(dt.getTime()+ (duracion * 60000));
+            dt.setTime(dt.getTime()+ (duracion * 60000)); //60000ms = 1 minuto
             vista.txtHorafin.setValue(dt);
             String[] arrayHoraFinal = String.valueOf(dt).split(" ");
             return arrayHoraFinal[3];
@@ -100,6 +99,7 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
     @Override
     public void mouseClicked(MouseEvent e) {
         if(vista.panelAdd == e.getSource()){
+            //realiza asignaciones a las variables
             idFuncion = "".equals(vista.txtId.getText())?0:Integer.parseInt(vista.txtId.getText());
             fechaIni = String.valueOf(vista.txtFechaIni.getDate());
             fechaFin = String.valueOf(vista.txtFechaFin.getDate());
@@ -112,22 +112,22 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
             idPeli = Integer.parseInt(pelis[vista.txtComboPeli.getSelectedIndex()][2]);
             estatus = vista.txtEstatus.getSelectedIndex();
             
-            if(opcion == 1){
+            if(opcion == 1){ //se inserta
                 if(modelo.funcionesInsertar(fechaIni, fechaFin, horaIni, horaFin, estatus, idPeli, idSala)){
                     ConSucces conSuccess = new ConSucces(genSuccess, "¡Éxito!", "Se ha insertado de manera correcta");
                     conSuccess.iniciarVista();
                 }
-                else{
+                else{ //fallo en la inserción
                     ConAlert conAlert = new ConAlert(genAlert, "No se ha podido insertar el registro");
                     conAlert.iniciarVista();
                 }
             }
-            else if(opcion == 2){
+            else if(opcion == 2){   //modificacion
                 if(modelo.funcionesActualizar(idFuncion, fechaIni, fechaFin, horaIni, horaFin, estatus, idPeli, idSala)){
                     ConSucces conSuccess = new ConSucces(genSuccess, "¡Éxito!", "Se ha modiificado de manera correcta");
                     conSuccess.iniciarVista();
                 }
-                else{
+                else{   //fallo en modificacion
                     ConAlert conAlert = new ConAlert(genAlert, "No se ha podido modificar el registro");
                     conAlert.iniciarVista();
                 }

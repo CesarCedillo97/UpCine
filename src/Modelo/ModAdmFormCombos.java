@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Modelo de Combos
  */
 package Modelo;
 
@@ -18,7 +16,7 @@ import java.sql.Statement;
 public class ModAdmFormCombos {
     
     private modelo.Conexion conexion = new modelo.Conexion();
-    
+   
     public boolean insertarCombo(String nombre, String descripcion, float precio){
         try
         {

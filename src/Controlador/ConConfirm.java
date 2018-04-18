@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Controlador de pantalla que funciona como un dialogo de confirmación
 package controlador;
 import Vista.GenSucces;
 import java.awt.event.KeyEvent;

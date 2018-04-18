@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//controlador de vista que funciona como un dialogo de alerta
 package controlador;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,13 +14,13 @@ public class ConAlert extends ControladorPrincipal implements MouseListener, Key
     GenAlert vistaAlert;
     String Mensaje;
     String Mensaje2;
-    
+    //Constructor con dos mensajes por si el mensaje es muy largo
     public ConAlert(GenAlert VistaAlert, String mensaje, String mensaje2){
         this.vistaAlert = VistaAlert;
         this.Mensaje = mensaje;
         this.Mensaje2 = mensaje2;
     }
-    
+    //constructor con un solo mensaje
     public ConAlert(GenAlert VistaAlert, String mensaje){
         this.vistaAlert = VistaAlert;
         this.Mensaje = mensaje;

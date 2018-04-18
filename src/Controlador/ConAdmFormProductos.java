@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Controlador para agregar y modificar productos
 package controlador;
 
 import Vista.GenSucces;
@@ -66,9 +62,10 @@ public class ConAdmFormProductos extends ControladorPrincipal implements MouseLi
             prov = arrayprovs[formProduct.txtProv.getSelectedIndex()][0];
             descripcion = formProduct.txtDescripcion.getText();
             if(opcion == 1 && !"".equals(cantidad) && !"".equals(costo) && !"".equals(precio) && !"".equals(descripcion)){
-                boolean boolCosto = validacionNum(costo,1);
+                boolean boolCosto = validacionNum(costo,1);//se verifica que sean numeros
                 boolean boolPrecio = validacionNum(precio,1);
                 if(boolCosto && boolPrecio){
+                    //se procede a insertar
                         if(modFormProduct.insertarProductos(cantidad, costo, precio, prov, descripcion)){
                         ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha insertado exitosamente");
                         success.iniciarVista();
@@ -78,7 +75,7 @@ public class ConAdmFormProductos extends ControladorPrincipal implements MouseLi
                         conAlert.iniciarVista();
                     }
                 }
-                else{
+                else{ //Muestra en donde se ingresaron digitos no numericos
                     String msg2 = "";
                     if(!boolCosto && !boolPrecio) msg2= "Costo y precio";
                     else if(!boolCosto)msg2 = "Costo";
@@ -88,7 +85,9 @@ public class ConAdmFormProductos extends ControladorPrincipal implements MouseLi
                 }
 
             }
+            
             else if(opcion == 2 && !"".equals(cantidad) && !"".equals(costo) && !"".equals(precio) && !"".equals(descripcion)){
+                //se modifica
                 if(modFormProduct.modificarProductos(id,cantidad, costo, precio, prov, descripcion)){
                     ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha modificado exitosamente");
                     success.iniciarVista();

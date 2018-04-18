@@ -1,21 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador de ventana que sirve para elegir la opcion en la que estará trabajando
  */
 package controlador;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
-import modelo.ModEmpOpcVender;
+import Modelo.ModEmpOpcVender;
 import vista.EmpOpcVender;
 import modelo.ModEmpVentaDulces;
 import vista.EmpVentaDulces;
 import vista.GenInicioSesion;
 import modelo.ModGenInicioSesion;
-import controlador.ConEmpVentaPeli;
 import modelo.ModEmpVentaPeli;
 import vista.EmpVentaBoleto;
 /**

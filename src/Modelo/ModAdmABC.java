@@ -22,6 +22,7 @@ public class ModAdmABC
     
     private Conexion conexion = new Conexion();
     public DefaultTableModel consulta(int opc){
+        //aquí se realizan las consultas de todos los datos, segun el parametro recibido
         switch(opc){
             case 1://empleados
                 txtConsulta = "select IdEmpleado as ID, Usuario, Contraseña, Nombre, Telefono, Direccion, Edad, Fecha_Inicio, \n" +

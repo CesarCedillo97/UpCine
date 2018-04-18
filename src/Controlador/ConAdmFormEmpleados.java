@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador de ABC empleados
  */
 package controlador;
 import java.awt.event.KeyEvent;
@@ -92,7 +90,7 @@ public class ConAdmFormEmpleados extends ControladorPrincipal implements MouseLi
 
                         }   
                         //si opcion = 2 lo modifica
-                        else if(opcion == 2 && modFormEmp.modificarEmpleado(id, nombre, telefono, direccion, edad, fechaBD, tipo, usuario, nombre)){
+                        else if(opcion == 2 && modFormEmp.modificarEmpleado(id, nombre, telefono, direccion, edad, fechaBD, tipo, usuario, contraseña)){
                             ConSucces success = new ConSucces(genSuccess, "¡Enhorabuena!","Se ha modificado el registro de manera exitosa");
                             success.iniciarVista();
                             genSuccess.addKeyListener(this);

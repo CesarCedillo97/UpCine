@@ -6,6 +6,7 @@
 package modelo;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,22 +27,32 @@ public class ModEmpVentaPeli {
             Date date1 = new Date();
             String date = dateFormat.format(date1);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT pelicula.IdPelicula, pelicula.Nombre, pelicula.Idioma, pelicula.Subtitulos, pelicula.Formato, funcion.Hora_inicio, pelicula.Imagen,funcion.sala_IdSala FROM funcion,pelicula WHERE pelicula.IdPelicula = funcion.pelicula_IdPelicula AND '2018-04-15' >= funcion.Fecha_inicio  AND '2018-04-15' <= funcion.Fecha_fin AND Estatus = 1");
+            ResultSet rs = s.executeQuery("SELECT pelicula.IdPelicula, pelicula.Nombre, pelicula.Idioma, pelicula.Subtitulos, pelicula.Formato, funcion.Hora_inicio, pelicula.Imagen,funcion.sala_IdSala, funcion.IdFuncion FROM funcion,pelicula WHERE pelicula.IdPelicula = funcion.pelicula_IdPelicula AND '"+date+"' >= funcion.Fecha_inicio  AND '"+date+"' <= funcion.Fecha_fin AND Estatus = 1");
             rs.last();
-            int size = rs.getRow();
             int x = 0;
+            int size = 0;
             rs.beforeFirst();
-            String[][] listaPelis = new String[size][8];
+            DateFormat df = new SimpleDateFormat("HH:mm:ss");
+            Date date2 = new Date();
             while(rs.next()){
-                listaPelis[x][0] = rs.getString("IdPelicula");
-                listaPelis[x][1] = rs.getString("Nombre");
-                listaPelis[x][2] = rs.getString("Idioma");
-                listaPelis[x][3] = rs.getString("Subtitulos");
-                listaPelis[x][4] = rs.getString("Formato");
-                listaPelis[x][5] = rs.getString("Hora_inicio");
-                listaPelis[x][6] = rs.getString("Imagen");
-                listaPelis[x][7] = rs.getString("sala_IdSala");
-                x++;
+                if(rs.getTime("Hora_inicio").getHours() >= date2.getHours() && rs.getTime("Hora_inicio").getMinutes() >= date2.getMinutes())
+                    size++;
+            }
+            rs.beforeFirst();
+            String[][] listaPelis = new String[size][9];
+            while(rs.next()){
+                if(rs.getTime("Hora_inicio").getHours() >= date2.getHours() && rs.getTime("Hora_inicio").getMinutes() >= date2.getMinutes()){
+                    listaPelis[x][0] = rs.getString("IdPelicula");
+                    listaPelis[x][1] = rs.getString("Nombre");
+                    listaPelis[x][2] = rs.getString("Idioma");
+                    listaPelis[x][3] = rs.getString("Subtitulos");
+                    listaPelis[x][4] = rs.getString("Formato");
+                    listaPelis[x][5] = rs.getString("Hora_inicio");
+                    listaPelis[x][6] = rs.getString("Imagen");
+                    listaPelis[x][7] = rs.getString("sala_IdSala");
+                    listaPelis[x][8] = rs.getString("IdFuncion");
+                    x++;
+                }
             }
             conexion.cerrarConexion(con);
             return listaPelis;
@@ -94,6 +105,7 @@ public class ModEmpVentaPeli {
         try{
             Connection con = conexion.abrirConexion();
             Statement q = con.createStatement();
+            //obtiene filas y columnas de la sala
             ResultSet rs2 = q.executeQuery("select Filas, Columnas from sala where IdSala = "+idSala+"");
             rs2.next();
             filas = rs2.getInt("Filas");
@@ -106,22 +118,29 @@ public class ModEmpVentaPeli {
                     asiento[j] = -1;
                 }                
             }
+            
+            Statement w = con.createStatement();
+            ResultSet rs3 = w.executeQuery("select Fila, Columna from asiento where sala_IdSala = "+idSala+"");
+            while(rs3.next()){
+                fila = rs3.getInt("Fila");
+                columna = rs3.getInt(("Columna"));
+                asientos[fila][columna] = 0;
+            }
+            //obtiene los asientos
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select Fila, Columna, Estatus from asiento where sala_IdSala = "+idSala+" ");
+            Date date = new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            ResultSet rs = s.executeQuery("select Fila, Columna from asiento, venta, boleto where asiento.sala_IdSala = "+idSala+" and boleto.venta_idventa = venta.idventa and venta.Fecha = '"+df.format(date)+"' and boleto.asiento_idAsiento = asiento.idAsiento");
             while(rs.next()){
                 fila = rs.getInt("Fila");
                 columna = rs.getInt(("Columna"));
-                if(rs.getInt("Estatus")==1){
-                    asientos[fila][columna] = 1;
-                }
-                else{
-                    asientos[fila][columna] = 0;
-                }
+                asientos[fila][columna] = 1;
             }
             conexion.cerrarConexion(con);
             return asientos;
         }
         catch(SQLException e){
+            System.out.println("falló");
             return null;
         }
     }
@@ -130,7 +149,7 @@ public class ModEmpVentaPeli {
         try{
             Connection con = conexion.abrirConexion();
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT Num_Asientos FROM sala WHERE IdSala = "+idSala+"");
+            ResultSet rs = s.executeQuery("SELECT Num_Asientos FROM sala WHERE IdSala = "+idSala+" AND Estatus = 1");
             rs.next();
             int num = rs.getInt("Num_Asientos");
             conexion.cerrarConexion(con);
@@ -138,6 +157,29 @@ public class ModEmpVentaPeli {
         }
         catch(SQLException e){
             return -1;
+        }
+    }
+    
+    public boolean insertarVenta(float subtotal, float iva, float total, int idEmp, int idCliente, int[][] selectedSeats, int idSala, int idFuncion){
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try{
+            Connection con = conexion.abrirConexion();
+            PreparedStatement s = con.prepareStatement("INSERT INTO venta(Tipo, Fecha, Subtotal, IVA, Total, empleado_IdEmpleado)VALUES (1,'"+df.format(date)+"', "+subtotal+", "+iva+", "+total+", "+idEmp+")",Statement.RETURN_GENERATED_KEYS);
+            s.executeUpdate();
+            ResultSet rs = s.getGeneratedKeys();
+            rs.next();
+            int idVenta = rs.getInt(1);
+            Statement q = con.createStatement();
+            for (int i = 0; i < selectedSeats.length; i++)
+            {
+                q.executeUpdate("INSERT INTO boleto(funcion_IdFuncion, asiento_idAsiento, venta_idventa) VALUES ("+idFuncion+", (SELECT idAsiento FROM asiento where Fila = "+selectedSeats[i][0]+" and Columna = "+selectedSeats[i][1]+" and sala_IdSala = "+idSala+"), "+idVenta+" ) ");
+            }
+            conexion.cerrarConexion(con);
+            return true;
+        }
+        catch(SQLException e){
+            return false;
         }
     }
 }

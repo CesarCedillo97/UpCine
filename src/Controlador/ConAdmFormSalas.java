@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador para dar de alta salas y modificarlas
+    asi como sus respectivos asientos
  */
 package controlador;
 
@@ -64,6 +63,7 @@ public class ConAdmFormSalas extends ControladorPrincipal implements MouseListen
         }
        
         else if(formAsientos.panelAdd == e.getSource()){
+            //asignaciones de variables
             id = "".equals(formSalas.txtId.getText())?-1:Integer.parseInt(formSalas.txtId.getText());
             System.out.println("id "+id);
             filas = Integer.parseInt(formSalas.txtFilas.getText());
@@ -118,33 +118,35 @@ public class ConAdmFormSalas extends ControladorPrincipal implements MouseListen
     
     public boolean clickSiguiente(){
         if(!"".equals(formSalas.txtFilas.getText()) && !("".equals(formSalas.txtCols.getText()))){
-            boolean boolFilas = validacionNum(formSalas.txtFilas.getText(),0);
+            boolean boolFilas = validacionNum(formSalas.txtFilas.getText(),0);//se verifica que se ingresaron numeros enteros
             boolean boolCols = validacionNum(formSalas.txtCols.getText(),0);
             if(boolFilas && boolCols){
                 id = "".equals(formSalas.txtId.getText())?-1:Integer.parseInt(formSalas.txtId.getText());
                 filas = Integer.parseInt(formSalas.txtFilas.getText());
                 columnas = Integer.parseInt(formSalas.txtCols.getText());
                 formSalas.dispose();
+                //se preparan para iniciar la vista de asientos
                 formAsientos.panelAdd.addMouseListener((MouseListener) this);
                 formAsientos.panelBack.addMouseListener((MouseListener) this);
                 formAsientos.setSize(700, 700);
                 formAsientos.setLocationRelativeTo(null);
                 formAsientos.title.setText("Seleccionar asientos");
-                arregloAsientos = new JLabel[filas][columnas];
-                seatsBool = new boolean[filas][columnas];
+                arregloAsientos = new JLabel[filas][columnas]; //esta variable almacena todos los labels que se imprimiran
+                seatsBool = new boolean[filas][columnas]; //esta variable funciona para saber si esta activo o no
                 formAsientos.panelAsientos.setLayout(new GridLayout(filas,columnas));
                 formAsientos.panelAsientos.setSize(300, 300);
                 if(opcion == 2){
+                    //se obtienen los asientos de la sala en caso de que se deseen modificar
                 seatsBool = modFormSalas.consultarAsientos(id, filas, columnas);
                     if(seatsBool != null){
-                        pintarAsientos();
+                        pintarAsientos();//se pintan los asientos
                     }
                     else{
                         System.out.println("No se pudo realizar la consulta");
                     }          
                 }
                 else if(opcion == 1){
-                    pintarAsientos();
+                    pintarAsientos(); 
                     numAsientos = filas * columnas;
                 }
             formAsientos.setVisible(true);
@@ -169,6 +171,7 @@ public class ConAdmFormSalas extends ControladorPrincipal implements MouseListen
     }
     
     public void pintarAsientos(){
+        //pinta los asientos en el panel
         for (int i = filas-1; i >= 0 ; i--)
         {
             for (int j = 0; j < columnas; j++)

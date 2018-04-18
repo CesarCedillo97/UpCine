@@ -1,15 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador de pantalla para el inicio de sesión
  */
 package controlador;
 import modelo.ModGenInicioSesion;
 import vista.GenInicioSesion;
 
-import modelo.ModAdmMenu;
+import Modelo.ModAdmMenu;
 import vista.AdmMenu;
-import modelo.ModEmpOpcVender;
+import Modelo.ModEmpOpcVender;
 import vista.EmpOpcVender;
 
 import vista.GenAlert;

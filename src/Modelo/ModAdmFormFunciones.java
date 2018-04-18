@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Modelo del formulario de funciones por el administrador
  */
 package modelo;
 import java.sql.*;
@@ -76,7 +74,7 @@ public class ModAdmFormFunciones {
             // Logger.getLogger(ejemploconex.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    //Se obtiene las peliculas y devuelve un arreglo bidimensional de string
     public String[][] obtenerPeliculas(){
         try{
             Connection con = conexion.abrirConexion();
@@ -100,6 +98,7 @@ public class ModAdmFormFunciones {
         }
     }
     
+    //se obtienen todas las salas y se retornan en un arreglo de strings
     public String[] obtenerSalas(){
         try{
             Connection con = conexion.abrirConexion();

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador del menu principal del administrador, a partir de aquí se deriva a los distintos modulos
  */
 package controlador;
 
@@ -10,7 +8,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
-import modelo.ModAdmMenu;
+import Modelo.ModAdmMenu;
 import vista.AdmMenu;
 import modelo.ModAdmABC;
 import modelo.ModGenInicioSesion;
@@ -60,6 +58,7 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
         AdmABC visAdmABC = new AdmABC();
         if(AdmMenu.lblCerrarSesion != e.getSource()){
             ConAdmABC conAdmABC = null;
+            //se carga el modulo según al panel que se haya dado click
             if (AdmMenu.panelEmpleados==e.getSource()) {
                 conAdmABC = new ConAdmABC(modAdmABC, visAdmABC,idEmp, 1);
             }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Controlador para realizar compras de productos
 package controlador;
 
 import Vista.GenSucces;
@@ -67,8 +63,7 @@ public class ConAdmFormCompras extends ControladorPrincipal implements MouseList
     }
 
     @Override
-    public void mouseClicked(MouseEvent e)
-    {
+    public void mouseClicked(MouseEvent e){
         if(formCompras.panelAddProductos == e.getSource()){
             ModAdmFormCombos modAddProduct = new ModAdmFormCombos();
             ConAdmAddProduct conAddProduct = new ConAdmAddProduct(addProduct, modAddProduct,2);
@@ -84,6 +79,7 @@ public class ConAdmFormCompras extends ControladorPrincipal implements MouseList
             }
         }
         else if (addProduct.panelAceptar==e.getSource()) {
+            //se verifica que se haya insertado todo
             Number cant = (Number)addProduct.sCantidad.getValue();
             int cantidad;
             String producto;
@@ -95,6 +91,7 @@ public class ConAdmFormCompras extends ControladorPrincipal implements MouseList
                 ConAlert alert = new ConAlert(vistaAlert, "Por favor, rellene todos los campos");
                 alert.iniciarVista();
             }else{
+                //se actualiza el modelo
                 DefaultListModel listmodel = (DefaultListModel) formCompras.listProductos.getModel();
                 listmodel.addElement(nProducto);
                 formCompras.listProductos.setModel(listmodel);
@@ -103,16 +100,19 @@ public class ConAdmFormCompras extends ControladorPrincipal implements MouseList
         }
         else if(formCompras.panelAdd == e.getSource()){
             changeValues();
+            //se realizan las validaciones antes de proseguir a insertar o modificar
             if(!"".equals(formCompras.txtSubtotal.getText()) && formCompras.listProductos.getModel().getSize() != 0){
                 subtotal = formCompras.txtSubtotal.getText();
                 Iva = formCompras.txtIva.getText();
                 total = formCompras.txtTotal.getText();
                 String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
                 estado = String.valueOf(formCompras.txtEstado.getSelectedIndex());
+                //para insertar
                 if(opcion == 1 && modFormCompras.insertarCompra(subtotal, Iva, total, fecha, estado, idEmp,formCompras.listProductos)){
                     ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha insertado correctamente");
                     success.iniciarVista();
                 }
+                //para modificar
                 else if(opcion == 2 && modFormCompras.modificarCompra(idCompra, subtotal, Iva, total, estado, formCompras.listProductos)){
                     ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha modificado correctamente");
                     success.iniciarVista();
@@ -223,7 +223,7 @@ public class ConAdmFormCompras extends ControladorPrincipal implements MouseList
             }
         }
     }
-    
+    //reasigna los valores a los textfields de iva y total
     public void changeValues(){
         formCompras.txtIva.setText(String.valueOf(Float.parseFloat(formCompras.txtSubtotal.getText())*(IVA/100)));
         formCompras.txtTotal.setText(String.valueOf(Float.parseFloat(formCompras.txtSubtotal.getText())*(IVA/100) + Float.parseFloat(formCompras.txtSubtotal.getText())));

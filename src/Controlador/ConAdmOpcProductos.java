@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Controlador;
-import Vista.AdmFormCombos;
 import Vista.AdmOpcProductos;
 import controlador.ConAdmABC;
 import controlador.ControladorPrincipal;

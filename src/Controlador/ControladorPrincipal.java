@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Clase semiabastracta que se implementa en todas los controladores,
+    la utilizamos para hacer que todos los controladores implementaran la clase iniciar vista
+    ademas de ser de mucha utilidad las funciones pues es más facil acceder a ellas 
  */
 package controlador;
 
 import java.awt.Color;
 import javax.swing.JPanel;
-import vista.GenAlert;
 /**
  *
  * @author adria
@@ -44,6 +43,7 @@ public abstract class ControladorPrincipal
     public void setColorSuccess(JPanel panel){
         panel.setBackground(new Color(100,247,14));
     }
+    //función para validar numeros
     //cuando recibe un 1 se puede ingresar un punto, 0 cuando no
     public boolean validacionNum(String txt, int opcion){
         if(txt.indexOf('.') < 0){

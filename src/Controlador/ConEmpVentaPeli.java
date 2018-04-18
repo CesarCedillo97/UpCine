@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controlador;
 
+//Controlador de venta de boletos 
+package controlador;
 import vista.EmpVentaBoleto;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import vista.GenAlert;
 import Vista.GenSucces;
+import Vista.EmpConfirmVenta;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Point;
@@ -23,7 +20,6 @@ import Vista.EmpSelectAsientos;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -36,10 +32,12 @@ import javax.swing.event.ChangeListener;
 public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListener, Runnable{
     EmpVentaBoleto vista;
     ModEmpVentaPeli modelo;
+    EmpSelectAsientos visAsientos = new EmpSelectAsientos();
+    EmpConfirmVenta confirmVenta = new EmpConfirmVenta();
     private int id;
     private String[][] listPelis;
     private String[][] listPelis2;
-    private int sala;
+    private int sala, funcion;
     private float IVA;
     private String hora, minutos, segundos, ampm;
     private Thread h1;
@@ -47,8 +45,10 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     private JLabel[][] arregloAsientos;
     int[][] asientos;
     private int numAsientoDis;
+    private int countAsientos; 
 
     ButtonGroup group = new ButtonGroup();
+    //constructor
     public ConEmpVentaPeli(ModEmpVentaPeli modelo, EmpVentaBoleto vista,int idEmp) {
         this.vista = vista;
         this.modelo = modelo;
@@ -80,7 +80,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         panelBoletos.setBounds(50, 50, 360, 150);
         vista.add(panelBoletos);
         h1 = new Thread(this);
-        h1.start();
+        h1.start(); //se inicia el hilo de reloj
         vista.setVisible(true);
     }
     //funcion que cambia los valores de subtotal, iva y total
@@ -96,6 +96,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         vista.txtTotal.setText(""+(subT + Float.parseFloat(vista.txtIva.getText())));
     }
     
+    //se cargan las peliculas que estan disponibles en las proximas horas del dia
     public void cargarPeliculas(){
         int filas2 = 0; 
         for(int x =0; x < listPelis.length; x++){
@@ -128,7 +129,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
             }            
         }
     }
-    
+    //verifica si hay otra función de la misma pelicula
     public boolean esIdRepetido(String id, String[][] lista, int x){
         for (int i = 0; i < x; i++){
             return lista[i][0].equals(id);
@@ -146,52 +147,61 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         }
         else if(vista.panelNext == e.getSource()){
             if(!"".equals(vista.txtPelicula.getText()) && (!"0".equals(String.valueOf(vista.txtEstud.getValue())) || (!"0".equals(String.valueOf(vista.txtMayor.getValue()))) || (!"0".equals(String.valueOf(vista.txtNormal.getValue()))))){
-                //vista.txtEstud.getModel()
-                vista.setEnabled(false);
-                EmpSelectAsientos visAsientos = new EmpSelectAsientos();
-                visAsientos.addWindowListener(new WindowAdapter(){
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        vista.setEnabled(true);
-                        visAsientos.dispose();
-                    }
-                });
-
-                asientos = modelo.obtenerAsientos(sala);
-                this.filas = asientos.length;
-                this.columnas = asientos[0].length;
-                visAsientos.panelAsientos.setLayout(new GridLayout(asientos.length,asientos[0].length));
-                arregloAsientos = new JLabel[asientos.length][asientos[0].length];
-                for (int i = asientos.length -1; i >= 0; i--)
-                {
-                    for (int j = 0; j < asientos[0].length; j++)
-                    {
-                        System.out.println(asientos[i][j]);
-                        switch (asientos[i][j])
-                        {
-                            case 1:
-                                arregloAsientos[i][j] = new JLabel(getLetra(i+1)+"-"+j,new ImageIcon(getClass().getResource("/iconos/asientoAzul.png")),0);
-                                break;
-                            case 0:
-                                arregloAsientos[i][j] = new JLabel(getLetra(i+1)+"-"+j,new ImageIcon(getClass().getResource("/iconos/asientoRojo.png")),0);
-                                break;
-                            case -1:
-                                arregloAsientos[i][j] = new JLabel("");
-                                break;
-                            default:
-                                break;
+                //obtiene el numero total de boletos comprados 
+                this.numAsientos = (Integer.parseInt(String.valueOf(vista.txtEstud.getValue())) + Integer.parseInt(String.valueOf(vista.txtMayor.getValue())) + Integer.parseInt(String.valueOf(vista.txtNormal.getValue())));
+                if(numAsientos <= numAsientoDis){
+                    vista.setEnabled(false);
+                    visAsientos.addWindowListener(new WindowAdapter(){
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                            vista.setEnabled(true);
+                            visAsientos.dispose();
                         }
-                        visAsientos.panelAsientos.add(arregloAsientos[i][j]);
-                        arregloAsientos[i][j].addMouseListener(new java.awt.event.MouseAdapter(){
-                            @Override
-                            public void mousePressed(java.awt.event.MouseEvent evt){
-                                asientosMousePressed(evt);
+                    });
+
+                    asientos = modelo.obtenerAsientos(sala);
+                    this.filas = asientos.length;
+                    this.columnas = asientos[0].length;
+                    visAsientos.panelAsientos.setLayout(new GridLayout(asientos.length,asientos[0].length));
+                    visAsientos.panelAdd1.addMouseListener(this);
+                    visAsientos.panelBack.addMouseListener(this);
+                    arregloAsientos = new JLabel[asientos.length][asientos[0].length];
+                    //imprime los asientos 
+                    for (int i = asientos.length -1; i >= 0; i--)
+                    {
+                        for (int j = 0; j < asientos[0].length; j++)
+                        {
+                            switch (asientos[i][j])
+                            {
+                                case 1:
+                                    arregloAsientos[i][j] = new JLabel(getLetra(i+1)+"-"+j,new ImageIcon(getClass().getResource("/iconos/asientoAzul.png")),0);
+                                    break;
+                                case 0:
+                                    arregloAsientos[i][j] = new JLabel(getLetra(i+1)+"-"+j,new ImageIcon(getClass().getResource("/iconos/asientoRojo.png")),0);
+                                    break;
+                                case -1:
+                                    arregloAsientos[i][j] = new JLabel("");
+                                    break;
+                                default:
+                                    break;
                             }
-                        });
+                            visAsientos.panelAsientos.add(arregloAsientos[i][j]);
+                            arregloAsientos[i][j].addMouseListener(new java.awt.event.MouseAdapter(){
+                                @Override
+                                public void mousePressed(java.awt.event.MouseEvent evt){
+                                    asientosMousePressed(evt);
+                                }
+                            });
+                        }
                     }
+                    visAsientos.setLocationRelativeTo(null);
+                    visAsientos.setVisible(true);
                 }
-                visAsientos.setLocationRelativeTo(null);
-                visAsientos.setVisible(true);
+                else{
+                    GenAlert genAlert = new GenAlert();
+                    ConAlert alert = new ConAlert(genAlert, "El numero de asientos es mayor a los","que hay disponibles");
+                    alert.iniciarVista();
+                }
             }
             else{
                 GenAlert genAlert = new GenAlert();
@@ -201,6 +211,33 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         }
         else if(vista.panelBack == e.getSource() || vista.panelBack1 == e.getSource()){
             vista.dispose();   
+        }
+        else if(visAsientos.panelAdd1 == e.getSource()){
+            if(countAsientos == numAsientos){
+                confirmVenta.panelAdd1.addMouseListener(this);
+                confirmVenta.panelBack.addMouseListener(this);
+                confirmVenta.txtSubtotal.setText(vista.txtSubtotal1.getText());
+                confirmVenta.txtIva.setText(vista.txtIva.getText());
+                confirmVenta.txtTotal.setText(vista.txtTotal.getText());
+                confirmVenta.txtPeli.setText(vista.txtPelicula.getText());
+                confirmVenta.txtBoletos.setText("Normal: "+vista.txtNormal.getValue()+" Estudiante: "+vista.txtEstud.getValue()+" Mayores: "+vista.txtMayor.getValue());
+                confirmVenta.setLocationRelativeTo(null);
+                confirmVenta.setVisible(true);
+            }
+            else{
+                GenAlert genAlert = new GenAlert();
+                ConAlert alert = new ConAlert(genAlert, "Por favor seleccione los asientos para continuar");
+                alert.iniciarVista();
+            }
+        }
+        else if(visAsientos.panelBack == e.getSource()){
+            visAsientos.dispose();
+        }
+        else if(confirmVenta.panelAdd1 == e.getSource()){
+            realizarInsercion();
+        }
+        else if(confirmVenta.panelBack == e.getSource()){
+            confirmVenta.dispose();
         }
         //para obtener la pelicula en la cual se dio click
         else{
@@ -222,6 +259,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
                             if(sw != true){
                                 vista.txtPelicula.setText(listPeli[1]);   
                                 sala = Integer.parseInt(listPeli[7]);
+                                funcion = Integer.parseInt(listPeli[8]);
                             }
                             vista.comboHorario.addItem(listPeli[5]);
                         }
@@ -231,21 +269,26 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
                     break;
             }
             numAsientoDis = modelo.getNumAsientos(sala);
+            vista.txtAsientosDisp.setText(""+numAsientoDis);
         }
     }
+    //esta función marca los asientos que fueron seleccionados 
     public void asientosMousePressed(java.awt.event.MouseEvent e){
+        
         for (int i = 0; i < filas; i++)
             {
                 for (int j = 0; j < columnas; j++)
                 {
                     if(arregloAsientos[i][j] == e.getSource()){
-                        if(asientos[i][j] == 0){
-                            arregloAsientos[i][j].setIcon(new ImageIcon(getClass().getResource("/iconos/asientoAzul.png")));
-                            asientos[i][j] = 1;
+                        if(asientos[i][j] == 0 && countAsientos < numAsientos){
+                            arregloAsientos[i][j].setIcon(new ImageIcon(getClass().getResource("/iconos/asientoVerde.png")));
+                            asientos[i][j] = 2;
+                            countAsientos++;
                         }
-                        else if(asientos[i][j] == 1){
+                        else if(asientos[i][j] == 2){
                             arregloAsientos[i][j].setIcon(new ImageIcon(getClass().getResource("/iconos/asientoRojo.png")));
                             asientos[i][j] = 0;
+                            countAsientos--;
                         }
                     }
                 }
@@ -266,6 +309,18 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         else if(vista.panelNext == e.getSource()){
             setColorAceptar(vista.panelNext);
         }
+        else if(visAsientos.panelBack == e.getSource()){
+            setColorCancelar(visAsientos.panelBack);
+        }
+        else if(visAsientos.panelAdd1 == e.getSource()){
+            setColorAceptar(visAsientos.panelAdd1);
+        }
+        else if(confirmVenta.panelAdd1 == e.getSource()){
+            setColorAceptar(confirmVenta.panelAdd1);
+        }
+        else if(confirmVenta.panelBack == e.getSource()){
+            setColorCancelar(confirmVenta.panelBack);
+        }
         
     }
 
@@ -279,6 +334,18 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         }
         else if(vista.panelNext == e.getSource()){
             resetColor(vista.panelNext);
+        }
+        else if(visAsientos.panelBack == e.getSource()){
+            resetColor(visAsientos.panelBack);
+        }
+        else if(visAsientos.panelAdd1 == e.getSource()){
+            resetColor(visAsientos.panelAdd1);
+        }
+        else if(confirmVenta.panelAdd1 == e.getSource()){
+            resetColor(confirmVenta.panelAdd1);
+        }
+        else if(confirmVenta.panelBack == e.getSource()){
+            resetColor(confirmVenta.panelBack);
         }
     }
 
@@ -315,6 +382,36 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     
     private String getLetra(int i) {
         return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
+    }
+    
+    public void realizarInsercion(){
+        int[][] selectedSeats = new int[countAsientos][2];
+        int counter = 0;
+        //obtiene los asientos que fueron
+        for (int i = filas-1; i >= 0; i--)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+                if(asientos[i][j] == 2){
+                    selectedSeats[counter][0] = i;
+                    selectedSeats[counter][1] = j;
+                    counter++;
+                }
+            }
+        }
+        if(modelo.insertarVenta(Float.parseFloat(confirmVenta.txtSubtotal.getText()), Float.parseFloat(confirmVenta.txtIva.getText()), Float.parseFloat(confirmVenta.txtTotal.getText()), this.id,-1,selectedSeats, sala, funcion)){
+            GenSucces genSuccess = new GenSucces();
+            ConSucces conSuccess = new ConSucces(genSuccess, "¡Éxito!", "¡Se ha concretado la venta!");
+            conSuccess.iniciarVista();
+            confirmVenta.dispose();
+            visAsientos.dispose();
+            vista.setEnabled(true);
+        }
+        else{
+            GenAlert genAlert = new GenAlert();
+            ConAlert conAlert = new ConAlert(genAlert, "No se pudo concretar la venta");
+            conAlert.iniciarVista();
+        }
     }
 
     

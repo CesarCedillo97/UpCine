@@ -1,7 +1,5 @@
     /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador para agregar y modificar proveedores
  */
 package controlador;
 import java.awt.event.MouseEvent;
@@ -48,6 +46,7 @@ public class ConAdmFormProveedores extends ControladorPrincipal implements Mouse
     @Override
     public void mouseClicked(MouseEvent e)
     {
+        //asignacion de datos 
         if(formProveedor.panelAdd == e.getSource()){
             id = formProveedor.txtId.getText();
             empresa = formProveedor.txtEmpresa.getText();
@@ -55,16 +54,18 @@ public class ConAdmFormProveedores extends ControladorPrincipal implements Mouse
             direccion = formProveedor.txtDireccion.getText();
             telefono = formProveedor.txtTelefono.getText();
             if(opcion == 1 && !"".equals(empresa) && !"".equals(responsable) && !"".equals(direccion) && !"".equals(telefono)){
+                //si no hay vacios se manda llamar a la funcion de insertar en el modelo
                 if(modFormProveedor.insertarProveedores(empresa, responsable, direccion, telefono)){
                     ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha insertado exitosamente");
                     success.iniciarVista();
                 }
-                else{
+                else{//Si falla al insertar
                     ConAlert conAlert = new ConAlert(genAlert,"No se ha podido agregar el registro");
                     conAlert.iniciarVista();
                 }
             }
             else if(opcion == 2 &&!"".equals(empresa) && !"".equals(responsable) && !"".equals(direccion) && !"".equals(telefono) ){
+                //se modifica
                 if(modFormProveedor.modificarProveedores(id, empresa, responsable, direccion, telefono)){
                     ConSucces success = new ConSucces(genSuccess, "¡Éxito!", "El registro se ha modificado exitosamente");
                     success.iniciarVista();

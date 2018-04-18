@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador para agregar y modificar peliculas
  */
 package controlador;
 import java.awt.event.ActionEvent;
@@ -33,7 +31,6 @@ public class ConAdmFormPeliculas extends ControladorPrincipal implements MouseLi
     GenSucces genSuccess = new GenSucces();
     GenAlert genAlert = new GenAlert();
     int opcion;
-    
     
     private String nombre, director, actores, idioma, subtitulos, imagen, generos, duracion, id;
     private String formato, clasificacion;
@@ -67,6 +64,7 @@ public class ConAdmFormPeliculas extends ControladorPrincipal implements MouseLi
     public void mouseClicked(MouseEvent e)
     {
         if(formPeli.panelAdd == e.getSource()){
+            //se realizan asignaciones
             this.nombre = formPeli.txtNombre.getText();
             this.director = formPeli.txtDirector.getText();
             this.duracion = formPeli.txtDuracion.getText();
@@ -84,15 +82,16 @@ public class ConAdmFormPeliculas extends ControladorPrincipal implements MouseLi
                !"".equals(idioma) &&
                !"".equals(imagen)&&
                !"".equals(actores)&&
-               !"".equals(duracion) &&
+               !"".equals(duracion) &&  //se verifica que no haya nada vacio para insertar
                formPeli.txtFormato.getSelectedIndex() != 0 &&
                formPeli.txtClasificacion.getSelectedIndex() != 0){
-                if(validacionNum(formPeli.txtDuracion.getText(),0)){
+                if(validacionNum(formPeli.txtDuracion.getText(),0)){//Inserción
                     if(opcion == 1 && modFormPelis.insertarPelicula(nombre, director, Integer.parseInt(duracion), clasificacion, generos, actores, idioma, subtitulos, formato, imagen)){
                     ConSucces success = new ConSucces(genSuccess, "¡Enhorabuena!","Se ha agregado el registro de manera exitosa");
                     success.iniciarVista();
                     genSuccess.addKeyListener(this);
                     }
+                    //modificacion
                     else if(opcion == 2 && modFormPelis.modificarPeli(id, nombre, director, Integer.parseInt(duracion), clasificacion, generos, actores, idioma, subtitulos, formato, imagen)){
                         ConSucces success = new ConSucces(genSuccess, "¡Enhorabuena!","Se ha modificado el registro de manera exitosa");
                         success.iniciarVista();
@@ -181,6 +180,7 @@ public class ConAdmFormPeliculas extends ControladorPrincipal implements MouseLi
     public void actionPerformed(ActionEvent e)
     {
         if(formPeli.btnBrowse == e.getSource()){
+            //se abre un fileChooser
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
             chooser.setFileFilter(filter);
@@ -205,8 +205,7 @@ public class ConAdmFormPeliculas extends ControladorPrincipal implements MouseLi
     }
 
     @Override
-    public void valueChanged(ListSelectionEvent e)
-    {
+    public void valueChanged(ListSelectionEvent e){
         if(formPeli.listGeneros == e.getSource()){
             if(formPeli.listGeneros.getSelectedIndices().length <= 3 && formPeli.listGeneros.getSelectedIndices().length > 0){    
                 formPeli.txtGeneros.setText(String.valueOf(formPeli.listGeneros.getSelectedValuesList()).replaceAll("\\[", "").replaceAll("\\]",""));

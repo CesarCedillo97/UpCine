@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Modelo de formulario de salas por partes del administrador
  */
 package modelo;
 
@@ -23,6 +21,7 @@ public class ModAdmFormSalas
         int id = -1;
         try{
             Connection con = conexion.abrirConexion();
+            //se inserta la sala
             PreparedStatement s = con.prepareStatement("insert into sala(Filas, Columnas, Num_Asientos, Tipo, Estatus) values('"+filas+"', '"+cols+"', '"+numAsientos+"', '"+tipo+"', '"+estatus+"')", Statement.RETURN_GENERATED_KEYS);
             s.executeUpdate();
             ResultSet rs = s.getGeneratedKeys();
@@ -35,6 +34,7 @@ public class ModAdmFormSalas
                     for (int j = 0; j < asientos[0].length; j++)
                     {
                         if(asientos[i][j] == true){
+                            //se insertan todos lo asientos
                             s.executeUpdate("insert into asiento(Fila, Columna, sala_IdSala) values("+i+", "+j+", "+id+")");
                         }
                     }
@@ -73,7 +73,7 @@ public class ModAdmFormSalas
             return false;
         }
     }
-    
+    // se obtiene una cuadricula de asientos
     public boolean[][] consultarAsientos(int idSala,int filas, int cols){
         int id = -1;
         int fila = 0, columna = 0;
@@ -97,6 +97,7 @@ public class ModAdmFormSalas
         }
     }
     
+    //se eliminan todos lo asientos de una sala
     public boolean eliminarAsientos(int idSala){
         try
         {
@@ -111,6 +112,7 @@ public class ModAdmFormSalas
         }
     }
     
+    //se elimina la sala
     public boolean eliminarSala(int idSala){
         try
         {

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador para agregar combos de productos
  */
 package Controlador;
 
@@ -17,11 +15,8 @@ import Vista.AdmAddProduct;
 import javax.swing.DefaultListModel;
 import vista.GenAlert;
 import controlador.ConAlert;
-import vista.GenConfirm;
-import controlador.ConConfirm;
 import Vista.GenSucces;
 import controlador.ConSucces;
-import static java.lang.Float.parseFloat;
 import java.util.ArrayList;
 import javax.swing.ListModel;
 

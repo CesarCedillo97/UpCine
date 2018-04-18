@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Controlador que funciona de auxiliar para todos los modulos, aquí se muestran los datos 
+    de todos los modulos.
  */
 package controlador;
 import java.awt.Color;
@@ -23,7 +22,7 @@ import vista.AdmABC;
 import vista.AdmFormEmpleados;
 import modelo.ModAdmFormEmpleados;
 import vista.AdmMenu;
-import modelo.ModAdmMenu;
+import Modelo.ModAdmMenu;
 import vista.AdmFormPeliculas;
 import modelo.ModAdmFormPeliculas;
 import vista.AdmFormSalas;
@@ -84,14 +83,15 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                 visAdmABC.tabla.removeColumn(visAdmABC.tabla.getColumnModel().getColumn(2));
                 break;
             case 3:
-                
+                visAdmABC.lblMenu.setText("Productos");
+                visAdmABC.tabla.setModel(modAdmABC.consulta(3));
                 break;
             case 4: 
                 visAdmABC.lblMenu.setText("Productos");
                 visAdmABC.tabla.setModel(modAdmABC.consulta(4));
                 break;
             case 5:
-                visAdmABC.lblMenu.setText("Preios");
+                visAdmABC.lblMenu.setText("Precios");
                 visAdmABC.tabla.setModel(modAdmABC.consulta(5));
                 break;
             case 6: 

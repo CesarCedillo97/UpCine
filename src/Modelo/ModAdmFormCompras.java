@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Modelo del formulario de compras por parte del administrador
  */
 package modelo;
 
@@ -22,6 +20,7 @@ import javax.swing.JList;
 public class ModAdmFormCompras
 {
     Conexion conexion = new Conexion();
+    //esta funcion sirve para retornar el valor del iva desde la base de datos
     public float obtenerIVA(){
         try{
             Connection con = conexion.abrirConexion();
@@ -35,7 +34,7 @@ public class ModAdmFormCompras
             return 0f;
         }
     }
-    
+    //insertar compra...
     public boolean insertarCompra(String subtotal,String iva,String total,String fecha,String estado,int idEmp, JList list){
         try{
             Connection con = conexion.abrirConexion();
@@ -60,7 +59,7 @@ public class ModAdmFormCompras
             return false;
         }
     }
-    
+    //se obtienen productos para asigarlos a combobox 
     public DefaultListModel obtenerProductos(int idCompra){
         try{
             Connection con = conexion.abrirConexion();
@@ -77,13 +76,15 @@ public class ModAdmFormCompras
             return null;
         }
     }
-    
+    //modificar compra
    public boolean modificarCompra(int idCompra,String subtotal,String iva,String total,String estado, JList list){
        try{
             Connection con = conexion.abrirConexion();
             Statement s = con.createStatement();
+            //primeramente actualiza la tabla compra
             s.executeUpdate("update compra set Subtotal = "+subtotal+",IVA = "+iva+",Total = "+total+",Estado = "+estado+" where IdCompra = "+idCompra+"");
             Statement q = con.createStatement();
+            //elimina los detalles de la compra en detalles_compra
             q.executeUpdate("delete from detalles_compra where compra_idCompra = "+idCompra+"");
            
             String[] sr;
@@ -91,6 +92,7 @@ public class ModAdmFormCompras
             {
                 sr = String.valueOf(list.getModel().getElementAt(i)).split(" ");
                 list.getModel().getElementAt(0);
+                //realiza la inserción de todos los elementos en detalles_compra
                 q.executeUpdate("insert into detalles_compra (compra_idCompra,producto_IdProducto,Cantidad) values ("+idCompra+", (select IdProducto from producto where Descripcion = '"+sr[1]+"'),"+sr[0].replace('x', ' ')+")");
             }
             conexion.cerrarConexion(con);
