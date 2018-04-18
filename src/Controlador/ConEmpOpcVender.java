@@ -54,7 +54,8 @@ public class ConEmpOpcVender extends ControladorPrincipal implements MouseListen
         if(VisOpcVender.panelBoleto == e.getSource()){
             EmpVentaBoleto vista = new EmpVentaBoleto();
             ModEmpVentaPeli modelo = new ModEmpVentaPeli();
-            ConEmpVentaPeli ventaBoleto = new ConEmpVentaPeli(modelo, vista, idEmp);
+            ConEmpVentaPeli ventaBoleto = new ConEmpVentaPeli(modelo, vista, idEmp, nombre);
+            VisOpcVender.dispose();
             ventaBoleto.iniciarVista();
         }
         //entra a la dulceria 
