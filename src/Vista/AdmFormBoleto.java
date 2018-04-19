@@ -25,7 +25,8 @@ public class AdmFormBoleto extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -52,7 +53,7 @@ public class AdmFormBoleto extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("jLabel3");
+        title.setText("Modificar boletos");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -82,28 +83,38 @@ public class AdmFormBoleto extends javax.swing.JFrame {
 
         jLabel3.setText("Descripcion");
 
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtPrecio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 txtPrecioActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Precio:");
 
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtDescripcion.setEditable(false);
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 txtDescripcionActionPerformed(evt);
             }
         });
 
-        panelAdd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        panelAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelAdd.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 panelAddMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 panelAddMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 panelAddMouseExited(evt);
             }
         });
@@ -138,14 +149,19 @@ public class AdmFormBoleto extends javax.swing.JFrame {
                 .addGap(6, 6, 6))
         );
 
-        panelBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        panelBack.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        panelBack.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 panelBackMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 panelBackMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 panelBackMouseExited(evt);
             }
         });
@@ -326,11 +342,11 @@ public class AdmFormBoleto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel panelAdd;
-    private javax.swing.JPanel panelBack;
+    public javax.swing.JPanel panelAdd;
+    public javax.swing.JPanel panelBack;
     public javax.swing.JLabel title;
-    private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JLabel txtId;
-    private javax.swing.JTextField txtPrecio;
+    public javax.swing.JTextField txtDescripcion;
+    public javax.swing.JLabel txtId;
+    public javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

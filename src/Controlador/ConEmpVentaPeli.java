@@ -48,6 +48,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     private Thread h1;
     private int filas, columnas, numAsientos;
     private JLabel[][] arregloAsientos;
+    private Float precioNormal,precioEstud, precioMayores;
     int[][] asientos;
     private int numAsientoDis;
     private int countAsientos; 
@@ -68,6 +69,10 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         vista.setLocationRelativeTo(null);
         vista.pack();
+        Float[] precios = modelo.obtenerBoletos();
+        this.precioNormal = precios[0];
+        this.precioEstud = precios[1];
+        this.precioMayores = precios[2];
         vista.panelBack.addMouseListener(this);
         vista.panelNext.addMouseListener(this);
         vista.panelBack1.addMouseListener(this);
@@ -93,9 +98,9 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         vista.txtNormal.getValue();
         vista.txtEstud.getValue();
         vista.txtMayor.getValue();
-        float subT = Float.parseFloat(String.valueOf(vista.txtNormal.getValue())) * 40;
-        subT += Float.parseFloat(String.valueOf(vista.txtMayor.getValue()))*25;
-        subT += Float.parseFloat(String.valueOf(vista.txtEstud.getValue()))*30;
+        float subT = Float.parseFloat(String.valueOf(vista.txtNormal.getValue())) * precioNormal;
+        subT += Float.parseFloat(String.valueOf(vista.txtMayor.getValue()))*precioMayores;
+        subT += Float.parseFloat(String.valueOf(vista.txtEstud.getValue()))*precioEstud;
         vista.txtSubtotal1.setText(""+subT);
         vista.txtIva.setText(""+(subT*(IVA/100)));
         vista.txtTotal.setText(""+(subT + Float.parseFloat(vista.txtIva.getText())));

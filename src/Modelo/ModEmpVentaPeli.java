@@ -182,4 +182,22 @@ public class ModEmpVentaPeli {
             return false;
         }
     }
+    
+    public Float[] obtenerBoletos(){
+        try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT Precio FROM mantenimiento WHERE Descripcion != 'IVA'");
+            Float[] boletos = new Float[3];
+            int x = 0;
+            while(rs.next()){
+                boletos[x] = rs.getFloat("Precio");
+                x++;
+            }
+            return boletos;
+        }
+        catch(SQLException e){
+            return null;
+        }
+    }
 }
