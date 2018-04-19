@@ -110,10 +110,6 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                 visAdmABC.lblMenu.setText("Combos");
                 visAdmABC.tabla.setModel(modAdmABC.consulta(9));
                 break;
-            case 10:
-                visAdmABC.lblMenu.setText("Ventas");
-                visAdmABC.tabla.setModel(modAdmABC.consulta(10));
-                break;
         }
        
         resizeColumnWidth(visAdmABC.tabla);

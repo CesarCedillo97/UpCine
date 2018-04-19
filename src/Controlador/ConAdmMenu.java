@@ -3,12 +3,15 @@
  */
 package controlador;
 
+import Controlador.ConAdmVenta;
 import Vista.AdmOpcProductos;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import Modelo.ModAdmMenu;
+import Modelo.ModAdmVentas;
+import Vista.AdmFormVentas;
 import vista.AdmMenu;
 import modelo.ModAdmABC;
 import modelo.ModGenInicioSesion;
@@ -56,6 +59,7 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
     public void mouseClicked(MouseEvent e) {
         ModAdmABC modAdmABC = new ModAdmABC();
         AdmABC visAdmABC = new AdmABC();
+        
         if(AdmMenu.lblCerrarSesion != e.getSource()){
             ConAdmABC conAdmABC = null;
             //se carga el modulo según al panel que se haya dado click
@@ -86,7 +90,10 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
                 conAdmABC = new ConAdmABC(modAdmABC, visAdmABC, idEmp, 8);
             }
             else if (AdmMenu.panelVentas == e.getSource()) {
-                conAdmABC = new ConAdmABC(modAdmABC, visAdmABC, idEmp, 10);
+                ModAdmVentas modAdmVentas = new ModAdmVentas();
+                AdmFormVentas visAdmVentas= new AdmFormVentas(); 
+                ConAdmVenta conAdmVenta = new ConAdmVenta(modAdmVentas, visAdmVentas);
+                conAdmVenta.iniciarVista();
             }
             else if(AdmMenu.panelCerrarSesion == e.getSource()){
                 AdmMenu.dispose();
@@ -99,6 +106,7 @@ public class ConAdmMenu extends ControladorPrincipal implements MouseListener
             {
                 AdmMenu.dispose();
                 conAdmABC.iniciarVista();
+                
             }
             
         }   

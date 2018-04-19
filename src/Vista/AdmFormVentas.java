@@ -244,7 +244,7 @@ public class AdmFormVentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -254,7 +254,7 @@ public class AdmFormVentas extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     public javax.swing.JLabel lblMenu;
     public javax.swing.JPanel panelBack;
-    private javax.swing.JTable tabla;
-    private javax.swing.JTextField txtBuscar;
+    public javax.swing.JTable tabla;
+    public javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
