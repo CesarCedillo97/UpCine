@@ -11,12 +11,18 @@ import Modelo.ModAdmVentas;
 import Vista.AdmFormVentas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JFrame;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 /**
  *
  * @author Jesus
  */
-public class ConAdmVenta extends ControladorPrincipal implements MouseListener, ActionListener {
+public class ConAdmVenta extends ControladorPrincipal implements MouseListener, ActionListener, ChangeListener {
 
     ModAdmVentas modAdmVentas;
     AdmFormVentas admFormVentas;
@@ -35,6 +41,15 @@ public class ConAdmVenta extends ControladorPrincipal implements MouseListener, 
         admFormVentas.setLocationRelativeTo(null);
         admFormVentas.setVisible(true);
         admFormVentas.btnBuscar.addActionListener(this);
+        admFormVentas.txtFechaInicio.addActionListener(this);
+        admFormVentas.txtFechaFin.addActionListener(this);
+        admFormVentas.txtFechaFin.setEnabled(false);
+        PropertyChangeListener listener = (PropertyChangeEvent e) ->
+        {
+            System.out.println("que pedo");
+        };
+       admFormVentas.txtFechaFin.addPropertyChangeListener(listener);
+        
     }
     
     @Override
@@ -55,14 +70,18 @@ public class ConAdmVenta extends ControladorPrincipal implements MouseListener, 
 
     @Override
     public void mouseExited(MouseEvent me) {
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(admFormVentas.btnBuscar == e.getSource())
-        {
-                this.admFormVentas.tabla.setModel(modAdmVentas.BuscarVenta(Integer.parseInt(admFormVentas.txtBuscar.getText())));
-        }
+
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e)
+    {
+        
     }
     
 }

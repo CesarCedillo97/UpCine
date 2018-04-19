@@ -159,7 +159,7 @@ public class ModEmpVentaPeli {
         }
     }
     
-    public boolean insertarVenta(float subtotal, float iva, float total, int idEmp, int idCliente, int[][] selectedSeats, int idSala, int idFuncion){
+    public boolean insertarVenta(float subtotal, float iva, float total, int idEmp, int idCliente, int[][] selectedSeats, int idSala, int idFuncion) {
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try{
@@ -170,7 +170,6 @@ public class ModEmpVentaPeli {
             rs.next();
             int idVenta = rs.getInt(1);
             Statement q = con.createStatement();
-
             for (int[] selectedSeat : selectedSeats)
             {
                 q.executeUpdate("INSERT INTO boleto(funcion_IdFuncion, asiento_idAsiento, venta_idventa) VALUES ("+idFuncion+", (SELECT idAsiento FROM asiento where Fila = " + selectedSeat[0] + " and Columna = " + selectedSeat[1] + " and sala_IdSala = " + idSala + "), " + idVenta + ")");
@@ -180,6 +179,9 @@ public class ModEmpVentaPeli {
         }
         catch(SQLException e){
             return false;
+        }
+        finally{
+            System.out.println("Se ha terminado");
         }
     }
     
