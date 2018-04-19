@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Controlador;
+import controlador.ControladorPrincipal;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import Modelo.ModAdmVentas;
@@ -25,6 +26,7 @@ public class ConAdmVenta extends ControladorPrincipal implements MouseListener, 
         this.admFormVentas = admFormVentas;
     }
     
+    @Override
      public void iniciarVista()
     {
         admFormVentas.setTitle("UpCine");
