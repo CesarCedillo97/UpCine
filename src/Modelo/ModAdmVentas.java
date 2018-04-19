@@ -46,7 +46,9 @@ public class ModAdmVentas {
                  try
                  {
                      //Ejecutar la consulta
+                     System.out.println("nel");
                      ResultSet rs = s.executeQuery("SELECT venta.`idventa` AS ID,venta.Tipo,venta.Fecha,venta.Subtotal,venta.Descuento,venta.IVA,venta.Total,empleado.nombre AS NOMBRE_EMPLEADO, cliente.`Nombre` AS NOMBRE_CLIENTE FROM venta INNER JOIN empleado ON venta.`empleado_IdEmpleado` = empleado.`IdEmpleado` INNER JOIN cliente ON venta.`cliente_idCliente` = cliente.`idCliente` where idventa= "+ buscar +" ");
+                     System.out.println("simon");
                      //Para establecer el modelo al JTable
                      modelo = new DefaultTableModel();
                      //Obteniendo la informacion. de las columnas
