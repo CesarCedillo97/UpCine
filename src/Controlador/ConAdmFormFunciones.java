@@ -54,6 +54,7 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
         vista.txtComboPeli.addActionListener(this);
         vista.panelAdd.addMouseListener((MouseListener) this);
         vista.panelBack.addMouseListener((MouseListener) this);
+        vista.txtFechaFin.addActionListener(this);
         genSuccess.panelAceptar.addMouseListener((MouseListener) this);
         vista.setVisible(true);
     }
@@ -93,6 +94,13 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
     public void actionPerformed(ActionEvent e) {
         if(vista.txtComboPeli == e.getSource()){
             setValueTxtHoraFin();
+        }
+        else if(vista.txtFechaFin == e.getSource()){
+            if(vista.txtFechaIni.getDate().compareTo(vista.txtFechaFin.getDate()) > 0){
+                ConAlert alert = new ConAlert(genAlert, "La fecha de fin debe ser posterior a la fecha", " de inicio");
+                alert.iniciarVista();
+                vista.txtFechaFin.setDate(vista.txtFechaIni.getDate());
+            }
         }
     }
 
