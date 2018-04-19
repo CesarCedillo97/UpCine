@@ -140,7 +140,6 @@ public class ModEmpVentaPeli {
             return asientos;
         }
         catch(SQLException e){
-            System.out.println("falló");
             return null;
         }
     }
@@ -162,24 +161,43 @@ public class ModEmpVentaPeli {
     
     public boolean insertarVenta(float subtotal, float iva, float total, int idEmp, int idCliente, int[][] selectedSeats, int idSala, int idFuncion){
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try{
             Connection con = conexion.abrirConexion();
-            PreparedStatement s = con.prepareStatement("INSERT INTO venta(Tipo, Fecha, Subtotal, IVA, Total, empleado_IdEmpleado)VALUES (1,'"+df.format(date)+"', "+subtotal+", "+iva+", "+total+", "+idEmp+")",Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement s = con.prepareStatement("INSERT INTO venta(TipoVenta, Fecha, Subtotal, IVA, Total, empleado_IdEmpleado)VALUES (1,'"+df.format(date)+"', "+subtotal+", "+iva+", "+total+", "+idEmp+")",Statement.RETURN_GENERATED_KEYS);
             s.executeUpdate();
             ResultSet rs = s.getGeneratedKeys();
             rs.next();
             int idVenta = rs.getInt(1);
             Statement q = con.createStatement();
-            for (int i = 0; i < selectedSeats.length; i++)
+
+            for (int[] selectedSeat : selectedSeats)
             {
-                q.executeUpdate("INSERT INTO boleto(funcion_IdFuncion, asiento_idAsiento, venta_idventa) VALUES ("+idFuncion+", (SELECT idAsiento FROM asiento where Fila = "+selectedSeats[i][0]+" and Columna = "+selectedSeats[i][1]+" and sala_IdSala = "+idSala+"), "+idVenta+" ) ");
+                q.executeUpdate("INSERT INTO boleto(funcion_IdFuncion, asiento_idAsiento, venta_idventa) VALUES ("+idFuncion+", (SELECT idAsiento FROM asiento where Fila = " + selectedSeat[0] + " and Columna = " + selectedSeat[1] + " and sala_IdSala = " + idSala + "), " + idVenta + ")");
             }
             conexion.cerrarConexion(con);
             return true;
         }
         catch(SQLException e){
             return false;
+        }
+    }
+    
+    public Float[] obtenerBoletos(){
+        try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT Precio FROM mantenimiento WHERE Descripcion != 'IVA'");
+            Float[] boletos = new Float[3];
+            int x = 0;
+            while(rs.next()){
+                boletos[x] = rs.getFloat("Precio");
+                x++;
+            }
+            return boletos;
+        }
+        catch(SQLException e){
+            return null;
         }
     }
 }

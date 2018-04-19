@@ -54,6 +54,8 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
         vista.txtComboPeli.addActionListener(this);
         vista.panelAdd.addMouseListener((MouseListener) this);
         vista.panelBack.addMouseListener((MouseListener) this);
+        vista.txtFechaFin.addActionListener(this);
+        vista.txtFechaIni.addActionListener(this);
         genSuccess.panelAceptar.addMouseListener((MouseListener) this);
         vista.setVisible(true);
     }
@@ -93,6 +95,30 @@ public class ConAdmFormFunciones extends ControladorPrincipal implements ActionL
     public void actionPerformed(ActionEvent e) {
         if(vista.txtComboPeli == e.getSource()){
             setValueTxtHoraFin();
+        }
+        
+        else if(vista.txtFechaFin == e.getSource()){
+            if(vista.txtFechaIni.getDate().compareTo(vista.txtFechaFin.getDate()) > 0){
+                ConAlert alert = new ConAlert(genAlert, "La fecha de fin debe ser posterior a la fecha", " de inicio");
+                alert.iniciarVista();
+                vista.txtFechaFin.setDate(vista.txtFechaIni.getDate());
+            }
+        }
+        else if(vista.txtFechaIni == e.getSource()){
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String fecha = df.format(date);
+            try
+            {
+                if(vista.txtFechaIni.getDate().compareTo(df.parse(fecha)) < 0){
+                    ConAlert alert = new ConAlert(genAlert, "La fecha de inicio debe ser posterior a la fecha actual");
+                    vista.txtFechaIni.setDate(df.parse(fecha));
+                    alert.iniciarVista();
+                }
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(ConAdmFormFunciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

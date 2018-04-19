@@ -41,6 +41,9 @@ import Controlador.ConAdmOpcProductos;
 import Vista.AdmFormCombos;
 import Modelo.ModAdmFormCombos;
 import Controlador.ConAdmFormCombos;
+import Modelo.ModAdmFormBoletos;
+import Vista.AdmFormBoleto;
+import Controlador.ConAdmFormBoleto;
 
 
 
@@ -92,6 +95,9 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                 break;
             case 5:
                 visAdmABC.lblMenu.setText("Precios");
+                visAdmABC.panelAdd.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                visAdmABC.lblAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/AddDisabled.png")));
+                visAdmABC.txtAdd.setForeground(new Color(128,128,128));
                 visAdmABC.tabla.setModel(modAdmABC.consulta(5));
                 break;
             case 6: 
@@ -152,8 +158,10 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
             this.fila = visAdmABC.tabla.rowAtPoint(e.getPoint());
             visAdmABC.lblModi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Edit_File_48px.png")));
             visAdmABC.txtModi.setForeground(new Color(25,116,232));
-            visAdmABC.lblElim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Delete_Document_52px.png")));
-            visAdmABC.txtElim.setForeground(new Color(25,116,232));
+            if(opcion != 5){
+                visAdmABC.lblElim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Delete_Document_52px.png")));
+                visAdmABC.txtElim.setForeground(new Color(25,116,232));
+            }
         }
         else if(visAdmABC.panelAdd == e.getSource()){ //PARA AGREGRA UN NUEVO REGISTRO SEGUN EL PANEL QUE SE HAYA SELECCIONADO
             switch(opcion){
@@ -214,7 +222,8 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
         }
         
         else if(visAdmABC.panelEli == e.getSource() && fila != -1){//PARA ABRIR UNA VENTANA Y PREGUNTAR SI ESTÁS SEGURO DE ELIMINAR
-            conConfirm.iniciarVista();
+            if(opcion != 5)
+                conConfirm.iniciarVista();
         }
         
         else if(visAdmABC.panelModi == e.getSource() && fila != -1){ //PARA MODIFICAR UN NUEVO REGISTRO SEGUN EL PANEL QUE SE HAYA SELECCIONADO
@@ -316,6 +325,13 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                     conFormProd.iniciarVista();
                     break;
                 case 5: //precios
+                    AdmFormBoleto visFormBoletos = new AdmFormBoleto();
+                    ModAdmFormBoletos modFormBoletos = new ModAdmFormBoletos();
+                    ConAdmFormBoleto conFormBoleto = new ConAdmFormBoleto(modFormBoletos, visFormBoletos);
+                    visFormBoletos.txtId.setText(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 0)));
+                    visFormBoletos.txtDescripcion.setText(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 1)));
+                    visFormBoletos.txtPrecio.setText(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 2)));
+                    conFormBoleto.iniciarVista();
                     break;
                 case 6: //salas y asientos
                     ModAdmFormSalas modFormSalas = new ModAdmFormSalas();
@@ -464,10 +480,10 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
         if (visAdmABC.panelBack == e.getSource()) {
             setColor(visAdmABC.panelBack);
         }
-        else if (visAdmABC.panelAdd==e.getSource()) {
+        else if (visAdmABC.panelAdd==e.getSource() && opcion != 5) {
             setColor(visAdmABC.panelAdd);
         }
-        else if (visAdmABC.panelEli==e.getSource() && this.fila != -1) {
+        else if (visAdmABC.panelEli==e.getSource() && this.fila != -1 && opcion !=5) {
             setColor(visAdmABC.panelEli);
         }
         else if (visAdmABC.panelModi==e.getSource() && this.fila != -1) {
@@ -488,7 +504,7 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
         if (visAdmABC.panelBack == e.getSource()) {
             resetColorSalir(visAdmABC.panelBack);
         }
-        else if (visAdmABC.panelAdd==e.getSource()) {
+        else if (visAdmABC.panelAdd==e.getSource() && opcion != 5) {
             resetColor(visAdmABC.panelAdd);
         }
         else if (visAdmABC.panelEli==e.getSource() && this.fila != -1) {

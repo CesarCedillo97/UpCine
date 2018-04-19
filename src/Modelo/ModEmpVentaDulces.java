@@ -6,10 +6,14 @@
 package modelo;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +25,9 @@ public class ModEmpVentaDulces {
     private final Conexion conexion = new Conexion();
     
     public DefaultTableModel mTabla(){
-        consulta = "select Fecha, Nombre, Total from empleado,venta where IdEmpleado = empleado_IdEmpleado and TipoVenta=2 ";
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        consulta = "select Fecha, Nombre, Total from empleado,venta where IdEmpleado = empleado_IdEmpleado and TipoVenta=2  ";
         
         try {
             //Para abrir la conexion a la BD
@@ -98,6 +104,40 @@ public class ModEmpVentaDulces {
             return precio;
         }
    }
+   
+   public boolean insertarVenta(float subtotal, float iva, float total, int idEmp, int idCliente, ArrayList a){
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            Connection con = conexion.abrirConexion();
+            PreparedStatement s = con.prepareStatement("INSERT INTO venta(TipoVenta, Fecha, Subtotal, IVA, Total, empleado_IdEmpleado)VALUES (2,'"+df.format(date)+"', "+subtotal+", "+iva+", "+total+", "+idEmp+")",Statement.RETURN_GENERATED_KEYS);
+            s.executeUpdate();
+            ResultSet rs = s.getGeneratedKeys();
+            rs.next();
+            int idVenta = rs.getInt(1);
+            Statement q = con.createStatement();
+
+            conexion.cerrarConexion(con);
+            return true;
+        }
+        catch(SQLException e){
+            return false;
+        }
+    }
+   
+   public float obtenerIVA(){
+        try{
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select Precio from mantenimiento where Descripcion = 'IVA'");
+            rs.next();
+            float fIVA= rs.getFloat("Precio");
+            return fIVA;
+        }
+        catch(SQLException e){
+            return 0f;
+        }
+    }
 }
     
 

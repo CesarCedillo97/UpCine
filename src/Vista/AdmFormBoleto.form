@@ -159,7 +159,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="jLabel3"/>
+                <Property name="text" type="java.lang.String" value="Modificar boletos"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -196,6 +196,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDescripcion">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDescripcionActionPerformed"/>
           </Events>
@@ -204,6 +207,11 @@
           </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="panelAdd">
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor de Mano"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelAddMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelAddMouseEntered"/>
@@ -265,6 +273,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelBack">
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor de Movimiento"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelBackMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelBackMouseEntered"/>

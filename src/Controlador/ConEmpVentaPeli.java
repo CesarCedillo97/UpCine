@@ -1,6 +1,8 @@
 
 //Controlador de venta de boletos 
 package controlador;
+import vista.EmpOpcVender;
+import Modelo.ModEmpOpcVender;
 import vista.EmpVentaBoleto;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,7 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import modelo.ModEmpVentaPeli;
 import Vista.EmpSelectAsientos;
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Calendar;
@@ -35,6 +39,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     EmpSelectAsientos visAsientos = new EmpSelectAsientos();
     EmpConfirmVenta confirmVenta = new EmpConfirmVenta();
     private int id;
+    private String nombreTrab;
     private String[][] listPelis;
     private String[][] listPelis2;
     private int sala, funcion;
@@ -43,16 +48,17 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     private Thread h1;
     private int filas, columnas, numAsientos;
     private JLabel[][] arregloAsientos;
+    private Float precioNormal,precioEstud, precioMayores;
     int[][] asientos;
     private int numAsientoDis;
     private int countAsientos; 
-
     ButtonGroup group = new ButtonGroup();
     //constructor
-    public ConEmpVentaPeli(ModEmpVentaPeli modelo, EmpVentaBoleto vista,int idEmp) {
+    public ConEmpVentaPeli(ModEmpVentaPeli modelo, EmpVentaBoleto vista,int idEmp, String nombre) {
         this.vista = vista;
         this.modelo = modelo;
         this.id = idEmp;
+        this.nombreTrab = nombre;
     }
     
 
@@ -60,9 +66,13 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
     public void iniciarVista() {
         vista.setTitle("UpCine");
         vista.pack();
-        vista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         vista.setLocationRelativeTo(null);
         vista.pack();
+        Float[] precios = modelo.obtenerBoletos();
+        this.precioNormal = precios[0];
+        this.precioEstud = precios[1];
+        this.precioMayores = precios[2];
         vista.panelBack.addMouseListener(this);
         vista.panelNext.addMouseListener(this);
         vista.panelBack1.addMouseListener(this);
@@ -88,9 +98,9 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         vista.txtNormal.getValue();
         vista.txtEstud.getValue();
         vista.txtMayor.getValue();
-        float subT = Float.parseFloat(String.valueOf(vista.txtNormal.getValue())) * 40;
-        subT += Float.parseFloat(String.valueOf(vista.txtMayor.getValue()))*25;
-        subT += Float.parseFloat(String.valueOf(vista.txtEstud.getValue()))*30;
+        float subT = Float.parseFloat(String.valueOf(vista.txtNormal.getValue())) * precioNormal;
+        subT += Float.parseFloat(String.valueOf(vista.txtMayor.getValue()))*precioMayores;
+        subT += Float.parseFloat(String.valueOf(vista.txtEstud.getValue()))*precioEstud;
         vista.txtSubtotal1.setText(""+subT);
         vista.txtIva.setText(""+(subT*(IVA/100)));
         vista.txtTotal.setText(""+(subT + Float.parseFloat(vista.txtIva.getText())));
@@ -113,9 +123,9 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
                 JPanel panelHoras = new JPanel();
                 j = counter*120;
                 if(listPelis[x][6] != null){
-                    panel.add(new JLabel(new ImageIcon(getClass().getResource("/movieImages/"+listPelis[x][6]))),BorderLayout.WEST);
+                    panel.add(new JLabel(new ImageIcon(getClass().getResource("/movieImages/"+listPelis[x][6])),JLabel.CENTER),BorderLayout.EAST);
                 }
-                JLabel label = new JLabel(listPelis[x][1]+" "+listPelis[x][4]+" ("+listPelis[x][2]+") Sub: "+listPelis[x][3]);
+                JLabel label = new JLabel(listPelis[x][1]+" "+listPelis[x][4]+" ("+listPelis[x][2]+") Sub: "+listPelis[x][3],new ImageIcon(getClass().getResource("/movieImages/"+listPelis[x][6])),JLabel.CENTER);
                 label.setFont(new Font("Arial", Font.PLAIN, 18));
                 listPelis2[counter][0] = listPelis[x][0];
                 listPelis2[counter][1] = String.valueOf(j);
@@ -123,6 +133,16 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
                 panel.add(label,BorderLayout.NORTH);
                 panel.add(panelHoras);
                 panel.addMouseListener(this);
+                panel.addMouseListener(new java.awt.event.MouseAdapter(){
+                    @Override
+                    public void mouseEntered(java.awt.event.MouseEvent evt){
+                        panel.setBackground(new Color(115, 163, 239));
+                    }
+                    @Override
+                    public void mouseExited(java.awt.event.MouseEvent evt){
+                        panel.setBackground(null);
+                    }
+                });
                 panel.setBounds(5,j,530,120);
                 vista.panelPelis.add(panel);
                 counter++;
@@ -139,10 +159,15 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        
     }
     @Override 
     public void mousePressed(MouseEvent e) {
         if (vista.panelBack == e.getSource()) {
+            EmpOpcVender visOpVender = new EmpOpcVender();
+            ModEmpOpcVender modOpcVender = new ModEmpOpcVender();
+            ConEmpOpcVender conOpcVender = new ConEmpOpcVender(modOpcVender, visOpVender, nombreTrab, id);
+            conOpcVender.iniciarVista();
             vista.dispose();
         }
         else if(vista.panelNext == e.getSource()){
@@ -158,7 +183,7 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
                             visAsientos.dispose();
                         }
                     });
-
+                    
                     asientos = modelo.obtenerAsientos(sala);
                     this.filas = asientos.length;
                     this.columnas = asientos[0].length;
@@ -181,8 +206,6 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
                                     break;
                                 case -1:
                                     arregloAsientos[i][j] = new JLabel("");
-                                    break;
-                                default:
                                     break;
                             }
                             visAsientos.panelAsientos.add(arregloAsientos[i][j]);
@@ -210,7 +233,11 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
             }
         }
         else if(vista.panelBack == e.getSource() || vista.panelBack1 == e.getSource()){
+            EmpOpcVender empOpcVender = new EmpOpcVender();
+            ModEmpOpcVender modEmpOpcVender = new ModEmpOpcVender();
+            ConEmpOpcVender conOpcVender = new ConEmpOpcVender(modEmpOpcVender, empOpcVender, nombreTrab, id);
             vista.dispose();   
+            conOpcVender.iniciarVista();
         }
         else if(visAsientos.panelAdd1 == e.getSource()){
             if(countAsientos == numAsientos){
@@ -261,7 +288,8 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
                                 sala = Integer.parseInt(listPeli[7]);
                                 funcion = Integer.parseInt(listPeli[8]);
                             }
-                            vista.comboHorario.addItem(listPeli[5]);
+                            String pelis[] = listPeli[5].split(":");
+                            vista.comboHorario.addItem(pelis[0]+":"+pelis[1]);
                         }
                     }
                 }
@@ -321,7 +349,6 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         else if(confirmVenta.panelBack == e.getSource()){
             setColorCancelar(confirmVenta.panelBack);
         }
-        
     }
 
     @Override
@@ -402,10 +429,21 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
         if(modelo.insertarVenta(Float.parseFloat(confirmVenta.txtSubtotal.getText()), Float.parseFloat(confirmVenta.txtIva.getText()), Float.parseFloat(confirmVenta.txtTotal.getText()), this.id,-1,selectedSeats, sala, funcion)){
             GenSucces genSuccess = new GenSucces();
             ConSucces conSuccess = new ConSucces(genSuccess, "¡Éxito!", "¡Se ha concretado la venta!");
+            genSuccess.addWindowListener(new WindowAdapter()
+            {
+                @Override
+                public void windowClosed(WindowEvent e)
+                {
+                    confirmVenta.dispose();
+                    visAsientos.dispose();
+                    vista.dispose();
+                    ModEmpVentaPeli modVentaPeli = new ModEmpVentaPeli();
+                    EmpVentaBoleto ventaPeli = new EmpVentaBoleto();
+                    ConEmpVentaPeli ConVentaPeli = new ConEmpVentaPeli(modVentaPeli, ventaPeli, id, nombreTrab);
+                    ConVentaPeli.iniciarVista();
+                }
+            });
             conSuccess.iniciarVista();
-            confirmVenta.dispose();
-            visAsientos.dispose();
-            vista.setEnabled(true);
         }
         else{
             GenAlert genAlert = new GenAlert();
@@ -413,6 +451,4 @@ public class ConEmpVentaPeli extends ControladorPrincipal implements MouseListen
             conAlert.iniciarVista();
         }
     }
-
-    
 }

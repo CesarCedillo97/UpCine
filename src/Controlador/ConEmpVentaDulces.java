@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import vista.GenAlert;
 import Vista.EmpOpcVentaDulces;
 import Controlador.ConEmpOpcVentaDulces;
+import Controlador.ConEmpConfirmVentaDulces;
+import Vista.EmpConfirmVentaDulces;
 /**
  *
  * @author Cesar Cedillo
@@ -36,6 +38,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
     private float total;
     private int idCliente;
     private int opc;
+    private int puntos;
 
     public ConEmpVentaDulces(ModEmpVentaDulces modVentaDulces, EmpVentaDulces empVentaDulces, int idEmp)
     {
@@ -106,11 +109,28 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
     public void ActualizarPrecios(){
         setSubTotal(0);
         setTotal(0);
+        setIva(modelo.obtenerIVA());
+        setDescuento(0);
+        if (getPuntos()>0 || getPuntos()<51) {
+            setDescuento(10);
+        }
          for (int i = 0;  i<cant.size() ; i++) {
              setSubTotal((getSubTotal()+(float)precio.get(i)));
         }
-         setTotal(((getSubTotal()+(getSubTotal()*getDescuento()))));
+         setIva(getSubTotal()*(getIva()/100));
+         setSubTotal(subTotal+getIva());
+         if (getPuntos()==0) {
+            setDescuento(0);
+            setTotal((getSubTotal()+getIva()));
+        }else{
+             setDescuento(getSubTotal()*(getDescuento()/100));
+             setTotal((getSubTotal()+getIva())-getDescuento());
+         }
+         
+         
          vista.lblSubTotal.setText(String.valueOf(getSubTotal()));
+         vista.lblDescuento.setText(String.valueOf(getDescuento()));
+         vista.lblIVA.setText(String.valueOf(getIva()));
          vista.lblx.setText(String.valueOf(getTotal()));
     }
     
@@ -121,7 +141,13 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
             vista.dispose();
         }else if (vista.panelProceder == e.getSource()) {//cuando registra todos los productos y quiere continuar al pago
             if (getTotal()!=0) {
-                
+                EmpConfirmVentaDulces vistaConfirmD = new EmpConfirmVentaDulces();
+                ConEmpConfirmVentaDulces conConfirm = new ConEmpConfirmVentaDulces(vistaConfirmD, modelo, getTotal(), getSubTotal(),getDescuento(),getIva(),nombre, idEmp);
+                conConfirm.iniciarVista();
+            }else{
+                GenAlert vistaAlert = new GenAlert();
+                ConAlert alert = new ConAlert(vistaAlert,"Alerta", "No Hay nada que vender");
+                alert.iniciarVista();
             }
             
         }else if (vista.panelCancelarVenta == e.getSource()) {//para cancela la venta y limpiar todos los campos
@@ -347,5 +373,19 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
 
     public void setOpc(int opc) {
         this.opc = opc;
+    }
+
+    /**
+     * @return the puntos
+     */
+    public int getPuntos() {
+        return puntos;
+    }
+
+    /**
+     * @param puntos the puntos to set
+     */
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
     }
 }

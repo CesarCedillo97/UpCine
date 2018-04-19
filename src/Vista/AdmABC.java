@@ -37,8 +37,8 @@ public class AdmABC extends javax.swing.JFrame {
         JScrollPane = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         panelAdd = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        txtAdd = new javax.swing.JLabel();
+        lblAdd = new javax.swing.JLabel();
         panelEli = new javax.swing.JPanel();
         lblElim = new javax.swing.JLabel();
         txtElim = new javax.swing.JLabel();
@@ -156,11 +156,11 @@ public class AdmABC extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Arial Black", 0, 13)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(25, 116, 232));
-        jLabel7.setText("AGREGAR");
+        txtAdd.setFont(new java.awt.Font("Arial Black", 0, 13)); // NOI18N
+        txtAdd.setForeground(new java.awt.Color(25, 116, 232));
+        txtAdd.setText("AGREGAR");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Add_List_52px.png"))); // NOI18N
+        lblAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Add_List_52px.png"))); // NOI18N
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -170,19 +170,19 @@ public class AdmABC extends javax.swing.JFrame {
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAddLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel7))
+                        .addComponent(txtAdd))
                     .addGroup(panelAddLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel2)))
+                        .addComponent(lblAdd)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelAddLayout.setVerticalGroup(
             panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAddLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(lblAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7))
+                .addComponent(txtAdd))
         );
 
         panelEli.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -274,15 +274,12 @@ public class AdmABC extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(panelEli, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(251, 251, 251)
                 .addComponent(panelModi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(JScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +290,7 @@ public class AdmABC extends javax.swing.JFrame {
                     .addComponent(panelEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelModi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -366,12 +363,11 @@ public class AdmABC extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JScrollPane JScrollPane;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public javax.swing.JLabel lblAdd;
     public javax.swing.JLabel lblElim;
     public javax.swing.JLabel lblMenu;
     public javax.swing.JLabel lblModi;
@@ -380,6 +376,7 @@ public class AdmABC extends javax.swing.JFrame {
     public javax.swing.JPanel panelEli;
     public javax.swing.JPanel panelModi;
     public javax.swing.JTable tabla;
+    public javax.swing.JLabel txtAdd;
     public javax.swing.JLabel txtElim;
     public javax.swing.JLabel txtModi;
     // End of variables declaration//GEN-END:variables
