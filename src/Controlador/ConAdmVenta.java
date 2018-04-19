@@ -44,11 +44,6 @@ public class ConAdmVenta extends ControladorPrincipal implements MouseListener, 
         admFormVentas.txtFechaInicio.addActionListener(this);
         admFormVentas.txtFechaFin.addActionListener(this);
         admFormVentas.txtFechaFin.setEnabled(false);
-        PropertyChangeListener listener = (PropertyChangeEvent e) ->
-        {
-            System.out.println("que pedo");
-        };
-       admFormVentas.txtFechaFin.addPropertyChangeListener(listener);
         
     }
     
