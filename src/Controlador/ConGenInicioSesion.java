@@ -88,9 +88,8 @@ public class ConGenInicioSesion extends ControladorPrincipal implements ActionLi
                 alert.iniciarVista();
             }
             else{
-                String mensaje = ("Usuario y/o contraseña incorrectos, \nquedan "+(5-falloInicio)+" intentos");
                 GenAlert visAlert = new GenAlert();
-                ConAlert alert = new ConAlert(visAlert, mensaje);
+                ConAlert alert = new ConAlert(visAlert, "Usuario y/o contraseña incorrectos,","quedan "+(5-falloInicio)+" intentos");
                 alert.iniciarVista();
             }
         }
