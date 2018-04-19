@@ -68,7 +68,7 @@ public class ModAdmABC
             txtConsulta = "select * from combos";
                 break;
             case 10: 
-            txtConsulta = "select * from venta";
+            txtConsulta = "SELECT venta.`idventa` AS ID,venta.Tipo,venta.Fecha,venta.Subtotal,venta.Descuento,venta.IVA,venta.Total,empleado.nombre AS NOMBRE_EMPLEADO, cliente.`Nombre` AS NOMBRE_CLIENTE FROM venta INNER JOIN empleado ON venta.`empleado_IdEmpleado` = empleado.`IdEmpleado` INNER JOIN cliente ON venta.`cliente_idCliente` = cliente.`idCliente` from venta";
                 break;
         }
         try{

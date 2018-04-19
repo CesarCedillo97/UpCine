@@ -25,8 +25,7 @@ public class AdmABC extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -59,18 +58,14 @@ public class AdmABC extends javax.swing.JFrame {
 
         panelBack.setBackground(new java.awt.Color(25, 116, 232));
         panelBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        panelBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelBackMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBackMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 panelBackMouseExited(evt);
             }
         });
@@ -135,15 +130,13 @@ public class AdmABC extends javax.swing.JFrame {
         JScrollPane.setAutoscrolls(true);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -151,18 +144,14 @@ public class AdmABC extends javax.swing.JFrame {
         JScrollPane.setViewportView(tabla);
 
         panelAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelAdd.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        panelAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelAddMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelAddMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 panelAddMouseExited(evt);
             }
         });
@@ -196,18 +185,14 @@ public class AdmABC extends javax.swing.JFrame {
                 .addComponent(jLabel7))
         );
 
-        panelEli.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        panelEli.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelEliMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelEliMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 panelEliMouseExited(evt);
             }
         });
@@ -241,18 +226,14 @@ public class AdmABC extends javax.swing.JFrame {
                 .addComponent(txtElim))
         );
 
-        panelModi.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        panelModi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelModiMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelModiMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 panelModiMouseExited(evt);
             }
         });

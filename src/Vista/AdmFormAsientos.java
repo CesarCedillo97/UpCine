@@ -27,8 +27,7 @@ public class AdmFormAsientos extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -107,18 +106,14 @@ public class AdmFormAsientos extends javax.swing.JFrame
 
         panelBotones.setBackground(new java.awt.Color(255, 255, 255));
 
-        panelAdd.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        panelAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelAddMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelAddMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 panelAddMouseExited(evt);
             }
         });
@@ -153,18 +148,14 @@ public class AdmFormAsientos extends javax.swing.JFrame
                 .addGap(6, 6, 6))
         );
 
-        panelBack.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        panelBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelBackMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panelBackMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 panelBackMouseExited(evt);
             }
         });
