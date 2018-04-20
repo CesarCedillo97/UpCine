@@ -68,7 +68,11 @@ public class ModAdmABC
             txtConsulta = "select * from combos";
                 break;
             case 10: 
-            txtConsulta = "SELECT venta.idventa AS ID,venta.Tipo,venta.Fecha,venta.Subtotal,venta.Descuento,venta.IVA,venta.Total,empleado.nombre AS NOMBRE_EMPLEADO, cliente.Nombre AS NOMBRE_CLIENTE FROM venta INNER JOIN empleado ON venta.`empleado_IdEmpleado` = empleado.`IdEmpleado` INNER JOIN cliente ON venta.`cliente_idCliente` = cliente.`idCliente` from venta";
+            txtConsulta = "select venta.idventa AS ID,venta.TipoVenta,venta.Fecha,venta.Subtotal,venta.Descuento,venta.IVA,venta.Total, empleado.Nombre AS NOMBRE_EMPLEADO,  \n" +
+                            "CASE WHEN venta.cliente_idCliente is not null THEN cliente.Nombre\n" +
+                            "	 WHEN venta.cliente_idCliente is null THEN \"\"\n" +
+                            "     end\n" +
+                            "AS NOMBRE_CLIENTE FROM venta, empleado, cliente where venta.empleado_IdEmpleado = empleado.IdEmpleado and (venta.cliente_idCliente = cliente.idCliente or venta.cliente_idCliente is null)";
                 break;
         }
         try{
