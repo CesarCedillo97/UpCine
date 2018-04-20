@@ -236,7 +236,8 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                 if (getOpc() == 1) { //con esto obtiene los productos que hay
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
-                    precio.add((float)modelo.obtenerPrecioCom(nombrePro));
+                    int p =nombre.size();
+                    precio.add((float)modelo.obtenerPrecioCom((String) nombre.get(p-1)));
 
                     ActualizarLista();
                     ActualizarPrecios();
@@ -248,7 +249,8 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
                     
                     cant.add((int)vistaPro.sCantidad.getValue());
                     nombre.add(String.valueOf(vistaPro.comboProducto.getSelectedItem()));
-                    precio.add((float)modelo.obtenerPrecioPro(nombrePro));
+                    int p =nombre.size();
+                    precio.add((float)modelo.obtenerPrecioPro((String) nombre.get(p-1)));
 
                     ActualizarLista();
                     ActualizarPrecios();

@@ -78,42 +78,51 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
         switch(opcion){
             case 1:
                 visAdmABC.lblMenu.setText("Empleados");
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.setModel(modAdmABC.consulta(1));
                 break;
             case 2:
                 visAdmABC.lblMenu.setText("Funciones");
                 visAdmABC.tabla.setModel(modAdmABC.consulta(2));
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.removeColumn(visAdmABC.tabla.getColumnModel().getColumn(2));
                 break;
             case 3:
                 visAdmABC.lblMenu.setText("Productos");
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.setModel(modAdmABC.consulta(3));
                 break;
             case 4: 
                 visAdmABC.lblMenu.setText("Productos");
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.setModel(modAdmABC.consulta(4));
                 break;
             case 5:
                 visAdmABC.lblMenu.setText("Precios");
                 visAdmABC.panelAdd.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.lblAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/AddDisabled.png")));
                 visAdmABC.txtAdd.setForeground(new Color(128,128,128));
                 visAdmABC.tabla.setModel(modAdmABC.consulta(5));
                 break;
             case 6: 
                 visAdmABC.lblMenu.setText("Sala y asientos");
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.setModel(modAdmABC.consulta(6));
                 break;
             case 7:
                 visAdmABC.lblMenu.setText("Proveedores");
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.setModel(modAdmABC.consulta(7));
                 break;
             case 8: 
                 visAdmABC.lblMenu.setText("Compras");
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.setModel(modAdmABC.consulta(8));
                 break;
             case 9:
                 visAdmABC.lblMenu.setText("Combos");
+                visAdmABC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 visAdmABC.tabla.setModel(modAdmABC.consulta(9));
                 break;
         }
@@ -209,7 +218,7 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                     ConAdmFormCompras conFormCompras = new ConAdmFormCompras(modFormCompras, formCompras, 1, idEmp);
                     conFormCompras.iniciarVista();
                     break;      
-                case 9:
+                case 9: //para combos
                     ModAdmFormCombos modFormPro = new ModAdmFormCombos();
                     AdmFormCombos formCombos = new AdmFormCombos();
                     ConAdmFormCombos conFormcombos = new ConAdmFormCombos(formCombos, modFormPro);
@@ -365,6 +374,9 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                     conFormCompras.setIdCompra(Integer.parseInt(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 0))));
                     conFormCompras.iniciarVista();
                     conFormCompras.changeValues();
+                    break;
+                 case 9://para el editar de combos
+                    
                     break;
                     
             }

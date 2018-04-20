@@ -29,10 +29,12 @@ import javax.swing.ListModel;
 public class ConAdmFormCombos extends ControladorPrincipal implements MouseListener, ListSelectionListener{
     AdmFormCombos vista;
     ModAdmFormCombos modelo;
-    public float precio;
-    public String nombre;
-    public String Descripcion;
+    private float precio;
+    private String Descripcion;
     ArrayList productos;
+    ArrayList cant = new ArrayList();
+    ArrayList nombre = new ArrayList();
+    ArrayList idProducto = new ArrayList();
     DefaultListModel listaModel = new DefaultListModel();
     AdmAddProduct vistaP = new AdmAddProduct();
 
@@ -48,7 +50,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
     public void iniciarVista() {
         vista.setTitle("Combos");
         vista.pack();
-        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        vista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         vista.setLocationRelativeTo(null);
         vista.setVisible(true);
         vista.panelAdd.addMouseListener(this);
@@ -74,6 +76,16 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
             return false;
     }
     
+    public void ActualizarLista(){
+        listaModel.clear();
+        for (int i = 0;  i<cant.size() ; i++) {
+            String Lista = ""+nombre.get(i)+" X"+cant.get(i)+"  ID:"+idProducto.get(i);
+            listaModel.addElement(Lista);
+            
+        }
+        
+    }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -81,58 +93,59 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
              //Para cuando agregue productos
             ConAdmAddProduct controlP = new ConAdmAddProduct(vistaP,modelo,2);
             controlP.iniciarVista();
-        }else if (vista.panelAdd==e.getSource()) {
-             setDescripcion(vista.listProductos.getSelectedValue());
-             if (!"".equals(vista.txtNombre.getText()) &&
-                 !"".equals(vista.txtPrecio.getText()) &&
-                 !"".equals(vista.listProductos.getSelectedValue())) {
-                 ListModel a = vista.listProductos.getModel(); 
-                 
-                    if (modelo.insertarCombo(vista.txtNombre.getText(), vista.listProductos.getSelectedValue(), Float.parseFloat(vista.txtPrecio.getText()))) {
+        }else if (vista.panelAdd==e.getSource()) { //Para agregar un combo
+             setDescripcion(vista.txtNombre.getText());
+             setPrecio(Float.parseFloat(vista.txtPrecio.getText()));
+             System.out.println(""+getPrecio());
+             if (getPrecio() > 0 &&
+                 !"".equals(getDescripcion()) &&
+                     (int)cant.size()!=0) {
+                    if (modelo.insertarCombo(getDescripcion(), idProducto, cant, getPrecio())) {
                     GenSucces vistaSucces = new GenSucces();
                     ConSucces success = new ConSucces(vistaSucces, "¡Hecho!", "Se agregó correctamente");
                     success.iniciarVista();
-                 }else{
+                    }else{
                         GenAlert vistaAlert = new GenAlert();
-                ConAlert alert = new ConAlert(vistaAlert, "La operación no se concretó");
-                alert.iniciarVista();
+                    ConAlert alert = new ConAlert(vistaAlert, "Alerta", "La operación no se concretó");
+                    alert.iniciarVista();
                     }
                     
-
              }else{
                  GenAlert vistaAlert = new GenAlert();
-                ConAlert alert = new ConAlert(vistaAlert,"Por favor,", "Rellene todos los campos");
+                ConAlert alert = new ConAlert(vistaAlert, "Por favor,", "Rellene todos los campos");
                 alert.iniciarVista();
              }
-             System.out.println(""+this.getDescripcion());
         }else if (vista.panelBack==e.getSource()) {
              vista.dispose();
         }else if (vista.panelEliminarProductos==e.getSource()) {
             int pos = vista.listProductos.getSelectedIndex();
              if (quitarV(pos)) {
-                 listaModel.remove(pos);
+                 cant.remove(pos);
+                 nombre.remove(pos);
+                 idProducto.remove(pos);
+                 ActualizarLista();
                  resetColor(vista.panelEliminarProductos);
              }else{
                 GenAlert vistaAlert = new GenAlert();
-                ConAlert alert = new ConAlert(vistaAlert, "No hay registro seleccionado");
+                ConAlert alert = new ConAlert(vistaAlert,"Alerta", "No hay registro seleccionado");
                 alert.iniciarVista();
              }
-        }else if (vistaP.panelAceptar==e.getSource()) {
-            Number cant = (Number)vistaP.sCantidad.getValue();
-            int cantidad;
-            String producto;
-            cantidad = (int)cant.intValue();
-            producto = String.valueOf(vistaP.comboProducto.getSelectedItem());
-            String nProducto = ("x"+cantidad+" "+producto);
+        }else if (vistaP.panelAceptar==e.getSource()) { //para cuando quieres agregar el nuevo producto
+            int cantidad = (int)vistaP.sCantidad.getValue();
+            String nombrePro = String.valueOf(vistaP.comboProducto.getSelectedItem());
             
-            if (cantidad <= 0 && !"".equals(producto)) {
-                GenAlert vistaAlert = new GenAlert();
+            
+            if (cantidad == 0){
+               GenAlert vistaAlert = new GenAlert();
                 ConAlert alert = new ConAlert(vistaAlert, "Por favor", "rellene todos los campos");
                 alert.iniciarVista();
+            
             }else{
-                DefaultListModel listmodel = (DefaultListModel) vista.listProductos.getModel();
-                listmodel.addElement(nProducto);
-                vista.listProductos.setModel(listmodel);
+                cant.add((int)vistaP.sCantidad.getValue());
+                nombre.add(String.valueOf(vistaP.comboProducto.getSelectedItem()));
+                int t = nombre.size();
+                idProducto.add(((int)modelo.obtenerIProducto((String)nombre.get(t-1))));
+                ActualizarLista();
                 vistaP.dispose();
             }
         }
@@ -220,19 +233,6 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
         this.precio = precio;
     }
 
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     /**
      * @return the Descripcion
