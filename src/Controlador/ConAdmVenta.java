@@ -5,24 +5,19 @@
  */
 package Controlador;
 import controlador.ControladorPrincipal;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import Modelo.ModAdmVentas;
 import Vista.AdmFormVentas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JFrame;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Jesus
  */
-public class ConAdmVenta extends ControladorPrincipal implements MouseListener, ActionListener, ChangeListener {
+public class ConAdmVenta extends ControladorPrincipal implements ActionListener, MouseListener {
 
     ModAdmVentas modAdmVentas;
     AdmFormVentas admFormVentas;
@@ -43,40 +38,66 @@ public class ConAdmVenta extends ControladorPrincipal implements MouseListener, 
         admFormVentas.btnBuscar.addActionListener(this);
         admFormVentas.txtFechaInicio.addActionListener(this);
         admFormVentas.txtFechaFin.addActionListener(this);
-        admFormVentas.txtFechaFin.setEnabled(false);
-        
-    }
-    
-    @Override
-    public void mouseClicked(MouseEvent me) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent me) {
+        admFormVentas.panelBack.addMouseListener(this);
+        admFormVentas.tabla.setModel(modAdmVentas.cargarTabla());
         
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(admFormVentas.btnBuscar == e.getSource()){
+            String fechaInic = admFormVentas.txtFechaInicio.getEditor().getText();
+            String fechaFin = admFormVentas.txtFechaFin.getEditor().getText();
+            String nomEmpleado = admFormVentas.txtEmpleado.getText();
+            int tipoVenta = -1;
+            switch (admFormVentas.comboTipo.getSelectedIndex()) {
+                case 0:
+                    tipoVenta = 1;
+                    break;
+                case 1:
+                    tipoVenta = 2;
+                    break;
+                case 2:
+                    tipoVenta = 3;
+                    break;
+            }
+            DefaultTableModel dtm = modAdmVentas.BuscarVenta(fechaInic, fechaFin, nomEmpleado, tipoVenta);
+            if(dtm != null)
+            {   
+                System.out.println(tipoVenta);
+                admFormVentas.tabla.setModel(dtm);
+            }
+        }
     }
 
     @Override
-    public void stateChanged(ChangeEvent e)
-    {
+    public void mouseClicked(MouseEvent me) {
+        if(admFormVentas.panelBack == me.getSource()){
+            admFormVentas.dispose();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
         
     }
-    
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        if(admFormVentas.panelBack == me.getSource()){
+            setColor(admFormVentas.panelBack);
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        if(admFormVentas.panelBack == me.getSource()){
+            resetColorSalir(admFormVentas.panelBack);
+        }
+    }
 }

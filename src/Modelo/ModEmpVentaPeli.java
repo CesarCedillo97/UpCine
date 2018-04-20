@@ -38,6 +38,7 @@ public class ModEmpVentaPeli {
                 if(rs.getTime("Hora_inicio").getHours() >= date2.getHours() && rs.getTime("Hora_inicio").getMinutes() >= date2.getMinutes())
                     size++;
             }
+            System.out.println(size);
             rs.beforeFirst();
             String[][] listaPelis = new String[size][9];
             while(rs.next()){
