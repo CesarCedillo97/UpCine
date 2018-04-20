@@ -3,11 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Modelo/ModAdmFormCombos.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Vista/AdmFormCombos.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConEmpVentaDulces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Modelo/ModEmpVentaDulces.java</file>
-            <file>file:/C:/Users/Cesar%20Cedillo/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmFormCombos.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/EmpConfirmVentaDulces.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmFormCombos.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConEmpVentaDulces.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/EmpOpcVentaDulces.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Modelo/ModAdmFormCombos.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/EmpConfirmVenta.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConEmpOpcVentaDulces.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Controlador/ConAdmVenta.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/EmpVentaDulces.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/AdmFormVentas.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/UpCine/src/Vista/AdmFormFunciones.java</file>
         </group>
     </open-files>
 </project-private>

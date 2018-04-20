@@ -18,6 +18,13 @@ import Controlador.ConEmpConfirmVentaDulces;
 import Vista.EmpConfirmVentaDulces;
 import Vista.GenSucces;
 import controlador.ConSucces;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.MaskFormatter;
 /**
  *
  * @author Cesar Cedillo
@@ -81,7 +88,6 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         vistaPro.panelCancelar.addMouseListener(this);
         vistaOPC.panelCombo.addMouseListener(this);
         vistaOPC.panelProductos.addMouseListener(this);
-        
         //para la lista
         vista.listaProductos.setModel(listaModel);
         
@@ -92,7 +98,44 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         vistaConfirmD.panelConfirm.addMouseListener(this);
         vistaConfirmD.panelCanel.addMouseListener(this);
         //Para lo de confirmVenta
-        vistaConfirmD.txtPago.setText("");
+        vistaConfirmD.lblTotal.setText("0.0");
+        vistaConfirmD.txtPago.setText("0.0");
+        vistaConfirmD.txtPago.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+
+                    if (!((c >= '0') && (c <= '9') ||    
+                       (c == KeyEvent.VK_BACK_SPACE) ||
+                       (c == KeyEvent.VK_PERIOD) ||
+                       (c == KeyEvent.VK_DELETE))) {
+                            vistaConfirmD.txtPago.setEditable(false);
+                    }
+                    else{
+                        vistaConfirmD.txtPago.setEditable(true);                        
+                    }
+
+                }
+            });        
+        vistaConfirmD.txtPago.getDocument().addDocumentListener(new DocumentListener()
+        {
+            @Override
+            public void insertUpdate(DocumentEvent e)
+            {
+                vistaConfirmD.lblCambio.setText(""+(Float.parseFloat(vistaConfirmD.txtPago.getText())-Float.parseFloat(vistaConfirmD.lblTotal.getText())));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e)
+            {
+                System.out.println("aasd");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e)
+            {
+            }
+        });
         
         //para el aceptar de Success
         genSucces.panelAceptar.addMouseListener(this);

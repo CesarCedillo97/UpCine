@@ -66,9 +66,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
         
         
     }
-    
-    
-    
+
     public boolean quitarV(int pos){
         if (pos != -1) {
             return true;
@@ -85,8 +83,7 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
         }
         
     }
-    
-
+   
     @Override
     public void mouseClicked(MouseEvent e) {
          if (vista.panelAddProductos==e.getSource()) {
