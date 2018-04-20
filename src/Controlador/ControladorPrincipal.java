@@ -45,10 +45,10 @@ public abstract class ControladorPrincipal
     }
     //función para validar numeros
     //cuando recibe un 1 se puede ingresar un punto, 0 cuando no
-    public boolean validacionNum(String txt, int opcion){
+    public boolean validacionNum(String txt, long opcion){
         if(txt.indexOf('.') < 0){
             try{
-                Integer.parseInt(txt);
+                Long.parseLong(txt);
                 return true;
             }
             catch(NumberFormatException e){
@@ -60,8 +60,8 @@ public abstract class ControladorPrincipal
             try{
                 System.out.println(txts[0]);
                 System.out.println(txts[1]);
-                Integer.parseInt(txts[0]);
-                Integer.parseInt(txts[1]);
+                Long.parseLong(txts[0]);
+                Long.parseLong(txts[1]);
                 return true;
             }
             catch(NumberFormatException e){
