@@ -222,7 +222,7 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                 case 9: //para combos
                     ModAdmFormCombos modFormPro = new ModAdmFormCombos();
                     AdmFormCombos formCombos = new AdmFormCombos();
-                    ConAdmFormCombos conFormcombos = new ConAdmFormCombos(formCombos, modFormPro);
+                    ConAdmFormCombos conFormcombos = new ConAdmFormCombos(formCombos, modFormPro,1);
                     conFormcombos.iniciarVista();
                     break; 
                 case 10:
@@ -377,7 +377,13 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                     conFormCompras.changeValues();
                     break;
                  case 9://para el editar de combos
-                    
+                    ModAdmFormCombos modCombos = new ModAdmFormCombos();
+                    AdmFormCombos vistaCombos = new AdmFormCombos();
+                    ConAdmFormCombos conCombos = new ConAdmFormCombos(vistaCombos, modCombos,2);//1para insertar, 2 para modificar
+                    vistaCombos.txtNombre.setText(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 2)));
+                    vistaCombos.txtPrecio.setText(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 1)));
+                    vistaCombos.lblId.setText(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 0)));
+                    conCombos.iniciarVista();
                     break;
                     
             }

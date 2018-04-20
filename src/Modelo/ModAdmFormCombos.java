@@ -39,6 +39,30 @@ public class ModAdmFormCombos {
             return false;
         }
     }
+    
+    public boolean modificarCombo(String nombre, ArrayList a,ArrayList b, float precio, int id){
+        try
+        {
+            Connection con = conexion.abrirConexion();
+            Statement s = con.createStatement();
+            s.executeUpdate("update combos set precio= "+precio+", nombre ='"+nombre+"' where idcombos= "+id+" ");
+            //Elimina los detalles del combo
+            Statement q = con.createStatement();
+            q.executeUpdate("delete from detalles_combos where id_IdCombo = "+id+"");
+            
+            //para infresar os nuevos valores a los detalles
+            Statement u = con.createStatement();
+            for (int i = 0; i < a.size(); i++)
+            {
+                u.executeUpdate("insert into detalles_combos (id_IdProductos,id_IdCombo,Cantidad) values ("+a.get(i)+","+id+","+b.get(i)+" )");
+            }
+            conexion.cerrarConexion(con);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+    
     public int obtenerIProducto(String nombre){
         int id = -1;
             try{
@@ -71,7 +95,9 @@ public class ModAdmFormCombos {
         catch(SQLException e){
             return false;
         }
-   }
+       }
+       
+        
     
     public String[] obtenerProductos(){
         try{

@@ -17,8 +17,10 @@ import vista.GenAlert;
 import controlador.ConAlert;
 import Vista.GenSucces;
 import controlador.ConSucces;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.ListModel;
+
 
 
 
@@ -28,10 +30,12 @@ import javax.swing.ListModel;
  */
 public class ConAdmFormCombos extends ControladorPrincipal implements MouseListener, ListSelectionListener{
     AdmFormCombos vista;
+    GenSucces vistaSucces = new GenSucces();
     ModAdmFormCombos modelo;
     private float precio;
     private String Descripcion;
     ArrayList productos;
+    int Opc;
     ArrayList cant = new ArrayList();
     ArrayList nombre = new ArrayList();
     ArrayList idProducto = new ArrayList();
@@ -39,10 +43,12 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
     AdmAddProduct vistaP = new AdmAddProduct();
 
 
-    public ConAdmFormCombos(AdmFormCombos vista, ModAdmFormCombos modelo) {
+    public ConAdmFormCombos(AdmFormCombos vista, ModAdmFormCombos modelo, int opc) {
         this.vista = vista;
         this.modelo = modelo;
+        this.Opc=opc;
     }
+    
     
     
     //para iniciar la vista
@@ -63,7 +69,26 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
         vistaP.panelCancelar.addMouseListener(this);
         productos = new ArrayList<>();
         
+        vista.txtPrecio.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+
+                    if (!((c >= '0') && (c <= '9') ||    
+                       (c == KeyEvent.VK_BACK_SPACE) ||
+                       (c == KeyEvent.VK_PERIOD) ||
+                       (c == KeyEvent.VK_DELETE))) {
+                            vista.txtPrecio.setEditable(false);
+                    }
+                    else{
+                        vista.txtPrecio.setEditable(true);                        
+                    }
+
+                }
+            });        
         
+        vistaSucces.panelAceptar.addMouseListener(this);
+
         
     }
 
@@ -92,20 +117,43 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
             controlP.iniciarVista();
         }else if (vista.panelAdd==e.getSource()) { //Para agregar un combo
              setDescripcion(vista.txtNombre.getText());
-             setPrecio(Float.parseFloat(vista.txtPrecio.getText()));
-             System.out.println(""+getPrecio());
+             if (!"".equals(vista.txtPrecio.getText())) {
+                 setPrecio(Float.parseFloat(vista.txtPrecio.getText()));
+             }else{
+                 GenAlert vistaAlert = new GenAlert();
+                ConAlert alert = new ConAlert(vistaAlert, "Por favor,", "Rellene todos los campos");
+                alert.iniciarVista();
+             }
+             
              if (getPrecio() > 0 &&
                  !"".equals(getDescripcion()) &&
                      (int)cant.size()!=0) {
-                    if (modelo.insertarCombo(getDescripcion(), idProducto, cant, getPrecio())) {
-                    GenSucces vistaSucces = new GenSucces();
-                    ConSucces success = new ConSucces(vistaSucces, "¡Hecho!", "Se agregó correctamente");
-                    success.iniciarVista();
-                    }else{
-                        GenAlert vistaAlert = new GenAlert();
-                    ConAlert alert = new ConAlert(vistaAlert, "Alerta", "La operación no se concretó");
-                    alert.iniciarVista();
-                    }
+                 
+                        if (this.Opc==1) {
+                            if (modelo.insertarCombo(getDescripcion(), idProducto, cant, getPrecio())) {
+                           
+                           ConSucces success = new ConSucces(vistaSucces, "¡Hecho!", "Se agregó correctamente");
+                           success.iniciarVista();
+                           }
+                            else{
+                               GenAlert vistaAlert = new GenAlert();
+                           ConAlert alert = new ConAlert(vistaAlert, "Alerta", "La operación no se concretó");
+                           alert.iniciarVista();
+                           }
+                        }else if (this.Opc==2) {
+                            int idCombo = Integer.parseInt(vista.lblId.getText());
+                            System.out.println(""+idCombo);
+                            if (modelo.modificarCombo(getDescripcion(), idProducto, cant, getPrecio(),idCombo)) {
+                           ConSucces success = new ConSucces(vistaSucces, "¡Hecho!", "Se modificó correctamente");
+                           success.iniciarVista();
+                           }
+                            else{
+                               GenAlert vistaAlert = new GenAlert();
+                           ConAlert alert = new ConAlert(vistaAlert, "Alerta", "La operación no se concretó");
+                           alert.iniciarVista();
+                           }
+
+                        }
                     
              }else{
                  GenAlert vistaAlert = new GenAlert();
@@ -148,6 +196,8 @@ public class ConAdmFormCombos extends ControladorPrincipal implements MouseListe
         }
         else if (vistaP.panelCancelar == e.getSource()) {
             vistaP.dispose();
+        }else if (vistaSucces.panelAceptar==e.getSource()) {
+            vista.dispose();
         }
     }
 
