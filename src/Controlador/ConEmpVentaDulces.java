@@ -100,6 +100,7 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
         //Para lo de confirmVenta
         vistaConfirmD.lblTotal.setText("0.0");
         vistaConfirmD.txtPago.setText("0.0");
+        vistaConfirmD.lblCambio.setText("0.0");
         vistaConfirmD.txtPago.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent e) {
@@ -122,7 +123,12 @@ public class ConEmpVentaDulces extends ControladorPrincipal implements MouseList
             @Override
             public void insertUpdate(DocumentEvent e)
             {
-                vistaConfirmD.lblCambio.setText(""+(Float.parseFloat(vistaConfirmD.txtPago.getText())-Float.parseFloat(vistaConfirmD.lblTotal.getText())));
+                setPago(Float.parseFloat(vistaConfirmD.txtPago.getText()));
+                if (getPago()<getTotal()) {
+                    vistaConfirmD.lblCambio.setText("0.0");
+                }else{
+                    vistaConfirmD.lblCambio.setText(String.format("%.2f", (Float.parseFloat(vistaConfirmD.txtPago.getText())-Float.parseFloat(vistaConfirmD.lblTotal.getText()))));
+                }
             }
 
             @Override

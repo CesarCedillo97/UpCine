@@ -44,6 +44,7 @@ import Controlador.ConAdmFormCombos;
 import Modelo.ModAdmFormBoletos;
 import Vista.AdmFormBoleto;
 import Controlador.ConAdmFormBoleto;
+import Vista.GenSucces;
 
 
 
@@ -438,12 +439,22 @@ public class ConAdmABC extends ControladorPrincipal implements MouseListener, Wi
                     if(modFormCompras.eliminarCompra(Integer.parseInt(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 0))))){
                         reset();
                     }
+                    break;
+                case 9: //combos
+                    ModAdmFormCombos modFormCombos = new ModAdmFormCombos();
+                    if(modFormCombos.eliminarCombo(Integer.parseInt(String.valueOf(visAdmABC.tabla.getValueAt(this.fila, 0))))){
+                        reset();
+                        
+                    }
+                    break;
             }
             genConfirm.dispose();
+            resetColor(genConfirm.panelAceptar);
 
         }
         else if(genConfirm.panelCancelar == e.getSource()){
             genConfirm.dispose();
+            resetColor(genConfirm.panelCancelar);
         }
     }
 

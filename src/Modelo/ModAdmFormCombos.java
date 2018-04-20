@@ -58,6 +58,21 @@ public class ModAdmFormCombos {
         
     }
     
+       public boolean eliminarCombo(int idCombo){
+       try{
+            Connection con = conexion.abrirConexion();
+            Statement q = con.createStatement();
+            q.executeUpdate("delete from combos where idcombos = "+idCombo+"");
+            Statement s = con.createStatement();
+            s.executeUpdate("delete from detalles_combos where id_IdCombo = "+idCombo+"");
+            conexion.cerrarConexion(con);
+            return true;
+        }
+        catch(SQLException e){
+            return false;
+        }
+   }
+    
     public String[] obtenerProductos(){
         try{
             Connection con = conexion.abrirConexion();

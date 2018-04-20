@@ -26,7 +26,7 @@ public class Conexion {
         "jdbc:mysql://localhost:3306/upcine","root","");
         }catch(SQLException e){
             GenAlert vista = new GenAlert();
-            ConAlert alert = new ConAlert(vista, "No se pudo abrir la conexion");
+            ConAlert alert = new ConAlert(vista,"Error de conexion.", "No se pudo abrir la conexion");
             System.out.println(e.getMessage());
             alert.iniciarVista();
             con = null;
